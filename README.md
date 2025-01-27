@@ -2,9 +2,9 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/payeverworldwide/sdk-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/payeverworldwide/sdk-php/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/payeverworldwide/sdk-php/badges/build.png?b=master)](https://scrutinizer-ci.com/g/payeverworldwide/sdk-php/build-status/master)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/payeverworldwide/sdk-php/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
-[![Latest Stable Version](https://poser.pugx.org/payever/payments-sdk-php/v/stable)](https://packagist.org/packages/payever/payments-sdk-php)
-[![Total Downloads](https://poser.pugx.org/payever/payments-sdk-php/downloads)](https://packagist.org/packages/payever/payments-sdk-php)
-[![License](https://poser.pugx.org/payever/payments-sdk-php/license)](https://packagist.org/packages/payever/payments-sdk-php)
+[![Latest Stable Version](https://poser.pugx.org/payeverorg/payever-php-sdk/v/stable)](https://packagist.org/packages/payeverorg/payever-php-sdk)
+[![Total Downloads](https://poser.pugx.org/payeverorg/payever-php-sdk/downloads)](https://packagist.org/packages/payeverorg/payever-php-sdk)
+[![License](https://poser.pugx.org/payeverorg/payever-php-sdk/license)](https://packagist.org/packages/payeverorg/payever-php-sdk)
 
 The payever PHP SDK enables seamless integration with the payever platform, providing access to its e-commerce & payment features. Designed for developers, this SDK simplifies interaction with payever APIs to create powerful applications and plugins.
 
