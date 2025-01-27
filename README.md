@@ -1,4 +1,4 @@
-# PHP SDK for payever plugin interactions - internal, not for public use
+# payever PHP SDK
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/payeverworldwide/sdk-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/payeverworldwide/sdk-php/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/payeverworldwide/sdk-php/badges/build.png?b=master)](https://scrutinizer-ci.com/g/payeverworldwide/sdk-php/build-status/master)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/payeverworldwide/sdk-php/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
@@ -6,11 +6,9 @@
 [![Total Downloads](https://poser.pugx.org/payever/payments-sdk-php/downloads)](https://packagist.org/packages/payever/payments-sdk-php)
 [![License](https://poser.pugx.org/payever/payments-sdk-php/license)](https://packagist.org/packages/payever/payments-sdk-php)
 
-This repository contains the open source PHP SDK that allows you to access payever from your PHP app.
+The payever PHP SDK enables seamless integration with the payever platform, providing access to its e-commerce & payment features. Designed for developers, this SDK simplifies interaction with payever APIs to create powerful applications and plugins.
 
 This library follows semantic versioning. Read more on [semver.org][1].
-
-Please note: this SDK is used within the payever plugins. It is NOT suitable for custom API integrations. If you would like to integrate with us via API, please visit https://docs.payever.org/shopsystems/api and follow the instructions and code examples provided there. 
 
 ## Troubleshooting 
 
@@ -18,7 +16,7 @@ If you faced an issue you can contact us via official support channel - support@
 
 ## Requirements
 
-* [PHP 5.4.0 and later][2]
+* [PHP 5.6.0 and later][2]
 * PHP cURL extension
 
 ## Installation
@@ -34,18 +32,20 @@ composer installed.
 Once composer is installed, execute the following command in your project root to install this library:
 
 ```sh
-composer require payever/payments-sdk-php
+composer require payeverorg/payever-php-sdk
 ```
 
 ## Documentation
 
-Raw HTTP API docs can be found here - https://docs.payever.org/shopsystems/api
+Raw HTTP API docs can be found here - https://docs.payever.org/api/payments/v3
 
 ### Enums
 
 The are several list of fixed string values used inside API. For convenience they are represented as constants and grouped into classes.
 
 * Payments
+    - [`ChannelSet`](lib/Payever/Core/Enum/ChannelSet.php) - list of available payever API channels
+    - [`ChannelTypeSet`](lib/Payever/Core/Enum/ChannelTypeSet.php) - list of available payever API channel types
     - [`PaymentMethod`](lib/Payever/Payments/Enum/PaymentMethod.php) - list of available payever payment methods
     - [`Status`](lib/Payever/Payments/Enum/Status.php) - list of available payever payment statuses
 
@@ -83,19 +83,6 @@ $clientConfiguration
 ;
 ```
 NOTE: All examples below assume you have [`ClientConfiguration`](https://github.com/payeverworldwide/core-sdk-php/blob/main/lib/Payever/Core/ClientConfiguration.php) instantiated inside `$clientConfiguration` variable.
-
-##### Logging
-
-You can setup logging of all API interactions by providing [PSR-3](https://www.php-fig.org/psr/psr-3/) compatible logger instance.
-
-In case if you don't have PSR-3 compatible logger at hand - this SKD contains simple file logger:
-```php
-use Psr\Log\LogLevel;
-use Payever\Sdk\Core\Logger\FileLogger;
-
-$logger = new FileLogger(__DIR__.'/payever.log', LogLevel::INFO);
-$clientConfiguration->setLogger($logger);
-```
 
 #### PaymentsApiClient
 
@@ -149,14 +136,14 @@ try {
 
 ```php
 use Payever\Sdk\Payments\PaymentsApiClient;
-use Payever\Sdk\Payments\Http\MessageEntity\RetrievePaymentResult;
+use Payever\Sdk\Payments\Http\ResponseEntity\Result\PaymentResult;
 
 $paymentId = '--PAYMENT-ID--';
 $paymentsApiClient = new PaymentsApiClient($clientConfiguration);
 
 try {
     $response = $paymentsApiClient->retrievePaymentRequest($paymentId);
-    /** @var RetrievePaymentResult $payment */
+    /** @var PaymentResult $payment */
     $payment = $response->getResponseEntity()->getResult();
     $status = $payment->getStatus();
 } catch(\Exception $exception) {

@@ -46,7 +46,7 @@ use Payever\Sdk\Payments\Http\ResponseEntity\SubmitPaymentResponse;
 
 /**
  * This class represents payever Payments API Connector
- * The PaymentsApiClient class handles Payever Payments API interactions, including payment creation and management.
+ * The PaymentsApiClient class handles payever Payments API interactions, including payment creation and management.
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)

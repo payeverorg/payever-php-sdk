@@ -34,7 +34,7 @@ use Psr\Log\LoggerAwareInterface;
 
 /**
  * This class represents payever Common API Connector
- * CommonApiClient handles communication with Payever API, manages OAuth tokens, and makes requests to endpoints
+ * CommonApiClient handles communication with payever API, manages OAuth tokens, and makes requests to endpoints
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  * @SuppressWarnings(PHPMD.MissingImport)

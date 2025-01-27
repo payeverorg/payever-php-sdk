@@ -29,7 +29,7 @@ use Payever\Sdk\Payments\Http\ResponseEntity\PaymentResponse;
 
 /**
  * This class represents payever B2B Payments API Connector
- * The B2BApiClient class interacts with the Payever API to perform B2B payment actions
+ * The B2BApiClient class interacts with the payever API to perform B2B payment actions
  * This endpoint is available for Allianz Trade pay and BFS B2B BNPL
  */
 class B2BApiClient extends CommonApiClient implements B2BApiClientInterface
