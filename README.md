@@ -1,7 +1,4 @@
 # payever PHP SDK
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/payeverworldwide/sdk-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/payeverworldwide/sdk-php/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/payeverworldwide/sdk-php/badges/build.png?b=master)](https://scrutinizer-ci.com/g/payeverworldwide/sdk-php/build-status/master)
-[![Code Intelligence Status](https://scrutinizer-ci.com/g/payeverworldwide/sdk-php/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 [![Latest Stable Version](https://poser.pugx.org/payeverorg/payever-php-sdk/v/stable)](https://packagist.org/packages/payeverorg/payever-php-sdk)
 [![Total Downloads](https://poser.pugx.org/payeverorg/payever-php-sdk/downloads)](https://packagist.org/packages/payeverorg/payever-php-sdk)
 [![License](https://poser.pugx.org/payeverorg/payever-php-sdk/license)](https://packagist.org/packages/payeverorg/payever-php-sdk)
@@ -92,39 +89,84 @@ This API client is used in all payment-related interactions.
 
 ```php
 use Payever\Sdk\Payments\Enum\PaymentMethod;
-use Payever\Sdk\Payments\PaymentsApiClient;
-use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentRequest;
+use Payever\Sdk\Payments\Enum\Salutation;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\CartItemV3Entity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\ChannelEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\CustomerAddressV3Entity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\CustomerEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\PurchaseEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\UrlsEntity;
+use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentV3Request;
 
-$paymentsApiClient = new PaymentsApiClient($clientConfiguration);
+$channelEntity = new ChannelEntity();
+$channelEntity->setName('api');
 
-$createPaymentEntity = new CreatePaymentRequest();
+$purchaseEntity = new PurchaseEntity();
+$purchaseEntity
+    ->setAmount(500)
+    ->setDeliveryFee(100)
+    ->setCurrency('EUR');
 
-$createPaymentEntity
-    ->setOrderId('1001')
-    ->setAmount(100.5)
-    ->setFee(10)
-    ->setCurrency('EUR')
-    ->setPaymentMethod(PaymentMethod::METHOD_SANTANDER_DE_INSTALLMENT)
+$customerEntity = new CustomerEntity();
+$customerEntity
+    ->setType('person')
+    ->setEmail('john.doe@example.com')
+    ->setPhone('+450001122')
+    ->setBirthdate('1990-01-01');
+
+$cartItem = new CartItemV3Entity();
+$cartItem
+    ->setName('Product 1')
+    ->setIdentifier('product-1')
+    ->setSku('product-1')
+    ->setUnitPrice(100)
+    ->setTaxRate(19)
+    ->setTotalAmount(400)
+    ->setTotalTaxAmount(19)
+    ->setQuantity(4)
+    ->setDescription('product 1 description')
+    ->setImageUrl('product-1.jpg')
+    ->setProductUrl('product-1')
+    ->setCategory('category');
+
+$addressEntity = new CustomerAddressV3Entity();
+$addressEntity
     ->setSalutation('mr')
     ->setFirstName('John')
     ->setLastName('Doe')
     ->setCity('Hamburg')
-    ->setCountry('DE')
+    ->setRegion('Region')
     ->setZip('10111')
     ->setStreet('Awesome street, 10')
-    ->setEmail('john.doe@example.com')
-    ->setPhone('+450001122')
-    ->setSuccessUrl('https://your.domain/success?paymentId=--PAYMENT-ID--')
-    ->setCancelUrl('https://your.domain/checkout?reason=cancel')
-    ->setFailureUrl('https://your.domain/checkout?reason=failure')
-    ->setNoticeUrl('https://your.domain/async-payment-callback?paymentId=--PAYMENT-ID--')
-;
+    ->setCountry('DE')
+    ->setSalutation(Salutation::SALUTATION_MR)
+    ->setOrganizationName('Company');
+
+$urls = new UrlsEntity();
+$urls
+    ->setSuccess('http::///your.domain/success?paymentId=--PAYMENT-ID--')
+    ->setPending('http::///your.domain/pending?paymentId=--PAYMENT-ID--')
+    ->setFailure('http::///your.domain/failure')
+    ->setCancel('http::///your.domain/cancel')
+    ->setNotification('http::///your.domain/notification?paymentId=--PAYMENT-ID--');
+
+$requestEntity = new CreatePaymentV3Request();
+$requestEntity
+    ->setChannel($channelEntity)
+    ->setReference('1001')
+    ->setPaymentMethod(PaymentMethod::METHOD_SANTANDER_DE_INSTALLMENT)
+    ->setClientIp('192.168.1.1')
+    ->setPurchase($purchaseEntity)
+    ->setCustomer($customerEntity)
+    ->setCart([$cartItem])
+    ->setBillingAddress($addressEntity)
+    ->setUrls($urls);
 
 try {
-    $response = $paymentsApiClient->createPaymentRequest($createPaymentEntity);
-    $responseEntity = $response->getResponseEntity();
-    
-    header(sprintf('Location: %s', $responseEntity->getRedirectUrl()), true);
+    $createPaymentRequest = $paymentsApiClients->createPaymentV3Request($requestEntity);
+    $createPaymentResponse = $createPaymentRequest->getResponseEntity();
+
+    header(sprintf('Location: %s', $createPaymentResponse->getRedirectUrl()), true);
     exit;
 } catch (\Exception $exception) {
     echo $exception->getMessage();
@@ -215,5 +257,5 @@ Please see the [license file][6] for more information.
 [3]: https://getcomposer.org
 [4]: https://getcomposer.org/doc/00-intro.md
 [5]: ../../releases
-[6]: LICENSE.md
+[6]: LICENSE
 [7]: ../../issues
