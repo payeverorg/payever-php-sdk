@@ -13,13 +13,13 @@ use Payever\Tests\Unit\Payever\Core\Http\AbstractRequestEntityTestCase;
 class ClaimPaymentRequestTest extends AbstractRequestEntityTestCase
 {
     protected static $scheme = array(
-        'is_non_inclusive' => false,
-        'is_legal' => false,
-        'is_disputed' => false,
-        'is_guarantee_existing' => false,
-        'policy_id' => '1234',
-        'business_unit_code' => '1234',
-        'extension_id' => '1234',
+        'isNonInclusive' => false,
+        'isLegal' => false,
+        'isDisputed' => false,
+        'isGuaranteeExisting' => false,
+        'policyId' => '1234',
+        'businessUnitCode' => '1234',
+        'extensionId' => '1234',
     );
 
     public function getEntity()

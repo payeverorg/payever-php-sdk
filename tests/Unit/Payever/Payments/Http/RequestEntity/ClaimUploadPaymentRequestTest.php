@@ -13,10 +13,10 @@ use Payever\Tests\Unit\Payever\Core\Http\AbstractRequestEntityTestCase;
 class ClaimUploadPaymentRequestTest extends AbstractRequestEntityTestCase
 {
     protected static $scheme = array(
-        'file_name' => 'file',
-        'mime_type' => 'application/pdf',
-        'document_type' => 'I01',
-        'base64_content' => 'file',
+        'fileName' => 'file',
+        'mimeType' => 'application/pdf',
+        'documentType' => 'I01',
+        'base64Content' => 'file',
     );
 
     public function getEntity()

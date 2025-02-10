@@ -131,7 +131,7 @@ $cartItem
 
 $addressEntity = new CustomerAddressV3Entity();
 $addressEntity
-    ->setSalutation('mr')
+    ->setSalutation(Salutation::SALUTATION_MR)
     ->setFirstName('John')
     ->setLastName('Doe')
     ->setCity('Hamburg')
@@ -139,7 +139,6 @@ $addressEntity
     ->setZip('10111')
     ->setStreet('Awesome street, 10')
     ->setCountry('DE')
-    ->setSalutation(Salutation::SALUTATION_MR)
     ->setOrganizationName('Company');
 
 $urls = new UrlsEntity();
@@ -234,18 +233,18 @@ try {
 ##### Get Company credit level
 
 ```php
-use Payever\Sdk\Payments\PaymentsApiClient;
+use Payever\Sdk\Payments\B2BApiClient;
 use Payever\Sdk\Payments\Http\RequestEntity\CompanyCreditRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\B2B\CreditCompanyEntity;
 
 $company = new CreditCompanyEntity();
 $company->setExternalId('81981372');
 
-$companySearchCredit = new CompanyCreditRequest();
-$companySearchCredit->setCompany($company);
+$companyCreditRequest = new CompanyCreditRequest();
+$companyCreditRequest->setCompany($company);
 
-$paymentsApiClient = new PaymentsApiClient($clientConfiguration);
-$result = $paymentsApiClient->companyCredit($companySearchCredit);
+$b2bApiClient = new B2BApiClient($clientConfiguration);
+$result = $b2bApiClient->companyCreditRequest($companyCreditRequest);
 ```
 
 ## License

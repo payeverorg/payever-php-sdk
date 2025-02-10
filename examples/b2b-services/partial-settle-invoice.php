@@ -20,11 +20,11 @@ try {
     /* Send invoice request. */
     $invoiceResponse = $b2bApiClient->invoicePaymentRequest($paymentId, $amount);
 
-    /** @var PaymentResponse $invoiceResult */
-    $invoiceResult = $invoiceResponse->getResponseEntity();
+    /** @var PaymentResponse $invoiceResponseEntity */
+    $invoiceResponseEntity = $invoiceResponse->getResponseEntity();
 
     ResultPrinter::printText('API call result:');
-    ResultPrinter::printResultEntity($invoiceResult->getResult());
+    ResultPrinter::printResultEntity($invoiceResponseEntity->getResult());
 } catch (\Exception $e) {
     ResultPrinter::printError('API call failed: ' . $e->getMessage());
 }

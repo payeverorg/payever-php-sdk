@@ -35,7 +35,7 @@ interface B2BApiClientInterface extends CommonApiClientInterface
      *
      * @return ResponseInterface
      */
-    public function searchCompany(CompanySearchRequest $companySearchRequest);
+    public function companySearchRequest(CompanySearchRequest $companySearchRequest);
 
     /**
      * Get company credit
@@ -46,7 +46,7 @@ interface B2BApiClientInterface extends CommonApiClientInterface
      *
      * @return ResponseInterface
      */
-    public function companyCredit(CompanyCreditRequest $companyCreditRequest);
+    public function companyCreditRequest(CompanyCreditRequest $companyCreditRequest);
 
     /**
      * Sends a request to settle payment

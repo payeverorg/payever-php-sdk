@@ -16,11 +16,11 @@ try {
     /* Send cancel request. */
     $cancelResponse = $paymentsApiClients->cancelPaymentRequest($paymentId);
 
-    /** @var PaymentResponse $cancelResult */
-    $cancelResult = $cancelResponse->getResponseEntity();
+    /** @var PaymentResponse $cancelResponseEntity */
+    $cancelResponseEntity = $cancelResponse->getResponseEntity();
 
     ResultPrinter::printText('API call result:');
-    ResultPrinter::printResultEntity($cancelResult->getResult());
+    ResultPrinter::printResultEntity($cancelResponseEntity->getResult());
 } catch (\Exception $e) {
     ResultPrinter::printError('API call failed: ' . $e->getMessage());
 }

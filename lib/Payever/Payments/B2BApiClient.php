@@ -46,7 +46,7 @@ class B2BApiClient extends CommonApiClient implements B2BApiClientInterface
      *
      * @throws \Exception
      */
-    public function searchCompany(CompanySearchRequest $companySearchRequest)
+    public function companySearchRequest(CompanySearchRequest $companySearchRequest)
     {
         $this->configuration->assertLoaded();
 
@@ -67,7 +67,7 @@ class B2BApiClient extends CommonApiClient implements B2BApiClientInterface
      *
      * @throws \Exception
      */
-    public function companyCredit(CompanyCreditRequest $companyCreditRequest)
+    public function companyCreditRequest(CompanyCreditRequest $companyCreditRequest)
     {
         $this->configuration->assertLoaded();
 

@@ -13,7 +13,7 @@
          "Payever\\Tests\\" : "tests/"
       }
    },
-   "description" : "SDK PHP for payever payments",
+   "description" : "PHP SDK for payever payments",
    "homepage" : "https://github.com/payeverorg/payever-php-sdk",
    "keywords" : [
       "payments",
@@ -40,5 +40,5 @@
       "ext-pdo" : "If you want to use MySQLLock"
    },
    "type" : "library",
-   "version" : "0.0.4"
+   "version" : "0.0.5"
 }

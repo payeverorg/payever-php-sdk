@@ -19,11 +19,11 @@ try {
     /* Send settle request. */
     $settleResponse = $b2bApiClient->settlePaymentRequest($paymentId);
 
-    /** @var PaymentResponse $settleResult */
-    $settleResult = $settleResponse->getResponseEntity();
+    /** @var PaymentResponse $settleResponseEntity */
+    $settleResponseEntity = $settleResponse->getResponseEntity();
 
     ResultPrinter::printText('API call result:');
-    ResultPrinter::printResultEntity($settleResult->getResult());
+    ResultPrinter::printResultEntity($settleResponseEntity->getResult());
 } catch (\Exception $e) {
     ResultPrinter::printError('API call failed: ' . $e->getMessage());
 }

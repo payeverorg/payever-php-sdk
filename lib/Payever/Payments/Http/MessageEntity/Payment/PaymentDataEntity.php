@@ -37,6 +37,8 @@ use Payever\Sdk\Core\Base\MessageEntity;
  */
 class PaymentDataEntity extends MessageEntity
 {
+    const UNDERSCORE_ON_SERIALIZATION = false;
+
     /** @var \DateTime|bool $birthdate */
     protected $birthdate;
 
@@ -49,17 +51,17 @@ class PaymentDataEntity extends MessageEntity
     /** @var string $frontendFinishUrl */
     protected $frontendFinishUrl;
 
-    /** @var string frontendCancelUrl */
+    /** @var string $frontendCancelUrl */
     protected $frontendCancelUrl;
 
-    /** @var boolean $forceRedirect */
-    protected $forceRedirect;
+    /** @var boolean $force_redirect */
+    protected $force_redirect;
 
-    /** @var string $organizationName */
-    protected $organizationName;
+    /** @var string $organization_name */
+    protected $organization_name;
 
-    /** @var string $streetType */
-    protected $streetType;
+    /** @var string $street_type */
+    protected $street_type;
 
     /** @var string $floor */
     protected $floor;
@@ -95,7 +97,7 @@ class PaymentDataEntity extends MessageEntity
      */
     public function setForceRedirect($forceRedirect)
     {
-        $this->forceRedirect = $forceRedirect;
+        $this->force_redirect = $forceRedirect;
 
         return $this;
     }
@@ -107,7 +109,7 @@ class PaymentDataEntity extends MessageEntity
      */
     public function getOrganizationName()
     {
-        return $this->organizationName;
+        return $this->organization_name;
     }
 
     /**
@@ -119,7 +121,7 @@ class PaymentDataEntity extends MessageEntity
      */
     public function setOrganizationName($organizationName)
     {
-        $this->organizationName = $organizationName;
+        $this->organization_name = $organizationName;
 
         return $this;
     }
@@ -131,7 +133,7 @@ class PaymentDataEntity extends MessageEntity
      */
     public function getStreetType()
     {
-        return $this->streetType;
+        return $this->street_type;
     }
 
     /**
@@ -143,16 +145,8 @@ class PaymentDataEntity extends MessageEntity
      */
     public function setStreetType($streetType)
     {
-        $this->streetType = $streetType;
+        $this->street_type = $streetType;
 
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray($object = null)
-    {
-        return $object ? get_object_vars($object) : get_object_vars($this);
     }
 }

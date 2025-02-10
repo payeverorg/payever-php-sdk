@@ -21,17 +21,17 @@ try {
     $company = new CreditCompanyEntity();
     $company->setExternalId($externalId);
 
-    $companySearchCreditRequest = new CompanyCreditRequest();
-    $companySearchCreditRequest->setCompany($company);
+    $companyCreditRequest = new CompanyCreditRequest();
+    $companyCreditRequest->setCompany($company);
 
-    /* Send company search credit request. */
-    $companySearchCreditResponse = $b2bApiClient->companyCredit($companySearchCreditRequest);
+    /* Send company credit line request. */
+    $companyCreditResponse = $b2bApiClient->companyCreditRequest($companyCreditRequest);
 
-    /** @var CompanyCreditResponse $companySearchCreditResult */
-    $companySearchCreditResult = $companySearchCreditResponse->getResponseEntity();
+    /** @var CompanyCreditResponse $companyCreditResponseEntity */
+    $companyCreditResponseEntity = $companyCreditResponse->getResponseEntity();
 
     ResultPrinter::printText('API call result:');
-    ResultPrinter::printResultEntity($companySearchCreditResult->getResult());
+    ResultPrinter::printResultEntity($companyCreditResponseEntity->getResult());
 } catch (\Exception $e) {
     ResultPrinter::printError('API call failed: ' . $e->getMessage());
 }

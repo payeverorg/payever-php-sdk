@@ -37,18 +37,4 @@ class ChannelEntity extends MessageEntity
 
     /** @var string $source */
     protected $source;
-
-    /**
-     * @deprecated
-     * @var int $channelSetId
-     */
-    protected $channelSetId;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray($object = null)
-    {
-        return $object ? get_object_vars($object) : get_object_vars($this);
-    }
 }

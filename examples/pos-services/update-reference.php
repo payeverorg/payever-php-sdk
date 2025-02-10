@@ -20,11 +20,11 @@ try {
     /* Send update reference request. */
     $updateReferenceResponse = $posApiClients->updateReferenceRequest($paymentId, $reference);
 
-    /** @var PaymentResponse $updateReferenceResult */
-    $updateReferenceResult = $updateReferenceResponse->getResponseEntity();
+    /** @var PaymentResponse $updateReferenceResponseEntity */
+    $updateReferenceResponseEntity = $updateReferenceResponse->getResponseEntity();
 
     ResultPrinter::printText('API call result:');
-    ResultPrinter::printResultEntity($updateReferenceResult->getResult());
+    ResultPrinter::printResultEntity($updateReferenceResponseEntity->getResult());
 } catch (\Exception $e) {
     ResultPrinter::printError('API call failed: ' . $e->getMessage());
 }

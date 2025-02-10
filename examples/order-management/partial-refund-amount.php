@@ -17,11 +17,11 @@ try {
     /* Send partial amount refund request. */
     $refundResponse = $paymentsApiClients->refundPaymentRequest($paymentId, $amount);
 
-    /** @var PaymentResponse $refundResult */
-    $refundResult = $refundResponse->getResponseEntity();
+    /** @var PaymentResponse $refundResponseEntity */
+    $refundResponseEntity = $refundResponse->getResponseEntity();
 
     ResultPrinter::printText('API call result:');
-    ResultPrinter::printResultEntity($refundResult->getResult());
+    ResultPrinter::printResultEntity($refundResponseEntity->getResult());
 } catch (\Exception $e) {
     ResultPrinter::printError('API call failed: ' . $e->getMessage());
 }

@@ -117,11 +117,11 @@ try {
     /* Send create payment v3 request. */
     $createPaymentResponse = $paymentsApiClients->createPaymentV3Request($requestEntity);
 
-    /** @var CreatePaymentResponse $createPaymentResult */
-    $createPaymentResult = $createPaymentResponse->getResponseEntity();
+    /** @var CreatePaymentResponse $createPaymentResponseEntity */
+    $createPaymentResponseEntity = $createPaymentResponse->getResponseEntity();
 
     ResultPrinter::printText('API call result:');
-    ResultPrinter::printText('Checkout link: ' . $createPaymentResult->getRedirectUrl());
+    ResultPrinter::printText('Checkout link: ' . $createPaymentResponseEntity->getRedirectUrl());
 } catch (\Exception $e) {
     ResultPrinter::printError('API call failed: ' . $e->getMessage());
 }

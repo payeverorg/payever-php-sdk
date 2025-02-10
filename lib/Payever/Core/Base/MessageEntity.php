@@ -188,9 +188,11 @@ abstract class MessageEntity implements MessageEntityInterface, \ArrayAccess
     #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
-        $property = StringHelper::camelize($offset);
+        if (static::UNDERSCORE_ON_SERIALIZATION && !is_integer($offset)) {
+            $offset = StringHelper::camelize($offset);
+        }
 
-        $this->{$property} = $value;
+        $this->{$offset} = $value;
     }
 
     /**
@@ -205,9 +207,11 @@ abstract class MessageEntity implements MessageEntityInterface, \ArrayAccess
     #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
-        $property = StringHelper::camelize($offset);
+        if (static::UNDERSCORE_ON_SERIALIZATION && !is_integer($offset)) {
+            $offset = StringHelper::camelize($offset);
+        }
 
-        return property_exists($this, $property);
+        return property_exists($this, $offset);
     }
 
     /**
@@ -222,9 +226,11 @@ abstract class MessageEntity implements MessageEntityInterface, \ArrayAccess
     #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
-        $property = StringHelper::camelize($offset);
+        if (static::UNDERSCORE_ON_SERIALIZATION && !is_integer($offset)) {
+            $offset = StringHelper::camelize($offset);
+        }
 
-        unset($this->{$property});
+        unset($this->{$offset});
     }
 
     /**
@@ -239,10 +245,12 @@ abstract class MessageEntity implements MessageEntityInterface, \ArrayAccess
     #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
-        $property = StringHelper::camelize($offset);
+        if (static::UNDERSCORE_ON_SERIALIZATION && !is_integer($offset)) {
+            $offset = StringHelper::camelize($offset);
+        }
 
-        if (property_exists($this, $property)) {
-            return $this->{$property};
+        if (property_exists($this, $offset)) {
+            return $this->{$offset};
         }
 
         return null;

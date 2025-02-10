@@ -19,9 +19,9 @@ class CartItemEntityTest extends AbstractMessageEntityTestCase
         'description' => 'stub_description',
         'thumbnail' => 'stub',
         'sku' => 'stub_sku',
-        'price_netto' => 90,
-        'price_net' => 90,
-        'vat_rate' => 10.55,
+        'priceNetto' => 90,
+        'priceNet' => 90,
+        'vatRate' => 10.55,
     );
 
     public function getEntity()

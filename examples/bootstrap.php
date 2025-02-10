@@ -12,9 +12,9 @@ require_once __DIR__ . '/functions.php';
 * See: https://docs.payever.org/api/payments/v3/getting-started-v3/authentication
 */
 
-$clientId = 'your-client-id';
-$clientSecret = 'your-client-secret';
-$businessUuid = 'your-business-uuid';
+$clientId = '2746_6abnuat5q10kswsk4ckk4ssokw4kgk8wow08sg0c8csggk4o00';
+$clientSecret = '2fjpkglmyeckg008oowckco4gscc4og4s0kogskk48k8o8wgsc';
+$businessUuid = '815c5953-6881-11e7-9835-52540073a0b6';
 
 $clientConfiguration = new \Payever\Sdk\Core\ClientConfiguration();
 $clientConfiguration

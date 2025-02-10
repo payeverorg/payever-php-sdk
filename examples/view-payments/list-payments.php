@@ -22,11 +22,11 @@ try {
     /* Get the all payments list. */
     $listPaymentsResponse = $paymentsApiClients->listPaymentsRequest($listPaymentsRequest);
 
-    /** @var RetrievePaymentResponse $listPaymentsResult */
-    $listPaymentsResult = $listPaymentsResponse->getResponseEntity();
+    /** @var RetrievePaymentResponse $listPaymentsResponseEntity */
+    $listPaymentsResponseEntity = $listPaymentsResponse->getResponseEntity();
 
     ResultPrinter::printText('API call result:');
-    ResultPrinter::printResultEntity($listPaymentsResult->getResult());
+    ResultPrinter::printResultEntity($listPaymentsResponseEntity->getResult());
 } catch (\Exception $e) {
     ResultPrinter::printError('API call failed: ' . $e->getMessage());
 }

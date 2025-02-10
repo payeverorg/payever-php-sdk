@@ -24,11 +24,11 @@ try {
     /* Send claim request. */
     $claimResponse = $b2bApiClient->claimPaymentRequest($paymentId, $claimPaymentRequest);
 
-    /** @var PaymentResponse $claimResult */
-    $claimResult = $claimResponse->getResponseEntity();
+    /** @var PaymentResponse $claimResponseEntity */
+    $claimResponseEntity = $claimResponse->getResponseEntity();
 
     ResultPrinter::printText('API call result:');
-    ResultPrinter::printResultEntity($claimResult->getResult());
+    ResultPrinter::printResultEntity($claimResponseEntity->getResult());
 } catch (\Exception $e) {
     ResultPrinter::printError('API call failed: ' . $e->getMessage());
 }

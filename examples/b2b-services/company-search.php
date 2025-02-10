@@ -30,13 +30,13 @@ try {
     $companySearchRequest->setAddress($companyAddressEntity);
 
     /* Send company search request. */
-    $companySearchResponse = $b2bApiClient->searchCompany($companySearchRequest);
+    $companySearchResponse = $b2bApiClient->companySearchRequest($companySearchRequest);
 
-    /** @var CompanySearchResponse $companySearchResult */
-    $companySearchResult = $companySearchResponse->getResponseEntity();
+    /** @var CompanySearchResponse $companySearchResponseEntity */
+    $companySearchResponseEntity = $companySearchResponse->getResponseEntity();
 
     ResultPrinter::printText('API call result:');
-    ResultPrinter::printResultEntity($companySearchResult->getResult());
+    ResultPrinter::printResultEntity($companySearchResponseEntity->getResult());
 } catch (\Exception $e) {
     ResultPrinter::printError('API call failed: ' . $e->getMessage());
 }

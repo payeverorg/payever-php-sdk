@@ -5,6 +5,8 @@
  * See https://docs.payever.org/api/payments/v3/view-payments/retrieve-payment
  */
 
+use Payever\Sdk\Payments\Http\ResponseEntity\RetrievePaymentResponse;
+
 try {
     /* Initialize the payever API library. */
     require_once '../bootstrap.php';
@@ -14,11 +16,11 @@ try {
     /* Retrieve the payment details. */
     $paymentDetailsResponse = $paymentsApiClients->retrievePaymentRequest($paymentId);
 
-    /** @var \Payever\Sdk\Payments\Http\ResponseEntity\RetrievePaymentResponse $paymentDetailsResult */
-    $paymentDetailsResult = $paymentDetailsResponse->getResponseEntity();
+    /** @var RetrievePaymentResponse $paymentDetailsResponseEntity */
+    $paymentDetailsResponseEntity = $paymentDetailsResponse->getResponseEntity();
 
     ResultPrinter::printText('API call result:');
-    ResultPrinter::printResultEntity($paymentDetailsResult->getResult());
+    ResultPrinter::printResultEntity($paymentDetailsResponseEntity->getResult());
 } catch (\Exception $e) {
     ResultPrinter::printError('API call failed: ' . $e->getMessage());
 }

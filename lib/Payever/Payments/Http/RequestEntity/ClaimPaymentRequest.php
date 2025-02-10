@@ -35,6 +35,8 @@ use Payever\Sdk\Core\Http\MessageEntity\RequestEntity;
  */
 class ClaimPaymentRequest extends RequestEntity
 {
+    const UNDERSCORE_ON_SERIALIZATION = false;
+
     /** @var bool $isNonInclusive */
     protected $isNonInclusive;
 
@@ -62,14 +64,6 @@ class ClaimPaymentRequest extends RequestEntity
     public function isValid()
     {
         return parent::isValid() && $this->isOptionalBooleansValid() && $this->isOptionalStringsValid();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray($object = null)
-    {
-        return $object ? get_object_vars($object) : get_object_vars($this);
     }
 
     /**

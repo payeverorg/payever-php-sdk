@@ -42,6 +42,8 @@ use Payever\Sdk\Core\Base\MessageEntity;
  */
 class CartItemEntity extends MessageEntity
 {
+    const UNDERSCORE_ON_SERIALIZATION = false;
+
     /** @var string $name */
     protected $name;
 
@@ -97,13 +99,5 @@ class CartItemEntity extends MessageEntity
         $this->extraData = new CartItemExtraDataEntity($extraData);
 
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray($object = null)
-    {
-        return $object ? get_object_vars($object) : get_object_vars($this);
     }
 }

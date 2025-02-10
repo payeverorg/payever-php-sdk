@@ -14,10 +14,10 @@ class PaymentDataEntityTest extends AbstractMessageEntityTestCase
 {
     protected static $scheme = array(
         'birthdate' => self::DEFAULT_STUB_DATE,
-        'conditions_accepted' => true,
-        'risk_session_id' => 'stub-session-id',
-        'frontend_finish_url' => 'https://example.com',
-        'frontend_cancel_url' => 'https://example.com',
+        'conditionsAccepted' => true,
+        'riskSessionId' => 'stub-session-id',
+        'frontendFinishUrl' => 'https://example.com',
+        'frontendCancelUrl' => 'https://example.com',
         'force_redirect' => true,
         'organization_name' => 'Organization Name',
         'street_type' => 'Street',

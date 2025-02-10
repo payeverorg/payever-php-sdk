@@ -38,11 +38,11 @@ try {
     /* Send verify request. */
     $verifyResponse = $posApiClients->verifyPaymentRequest($paymentId, $verifyPaymentRequest);
 
-    /** @var PaymentResponse $verifyResult */
-    $verifyResult = $verifyResponse->getResponseEntity();
+    /** @var PaymentResponse $verifyResponseEntity */
+    $verifyResponseEntity = $verifyResponse->getResponseEntity();
 
     ResultPrinter::printText('API call result:');
-    ResultPrinter::printResultEntity($verifyResult->getResult());
+    ResultPrinter::printResultEntity($verifyResponseEntity->getResult());
 } catch (\Exception $e) {
     ResultPrinter::printError('API call failed: ' . $e->getMessage());
 }

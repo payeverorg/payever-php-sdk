@@ -29,6 +29,8 @@ use Payever\Sdk\Core\Http\MessageEntity\RequestEntity;
  */
 class ClaimUploadPaymentRequest extends RequestEntity
 {
+    const UNDERSCORE_ON_SERIALIZATION = false;
+
     const DOCUMENT_TYPE_INVOICE = 'I01';
 
     /** @var string $fileName */
@@ -61,14 +63,6 @@ class ClaimUploadPaymentRequest extends RequestEntity
     public function getRequired()
     {
         return ['fileName', 'mimeType', 'documentType', 'base64Content'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray($object = null)
-    {
-        return $object ? get_object_vars($object) : get_object_vars($this);
     }
 
     /**

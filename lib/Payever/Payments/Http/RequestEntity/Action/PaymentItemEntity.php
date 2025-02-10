@@ -51,12 +51,4 @@ class PaymentItemEntity extends RequestEntity
             (!$this->price || is_numeric($this->price)) &&
             (!$this->quantity || is_numeric($this->quantity));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray($object = null)
-    {
-        return $object ? get_object_vars($object) : get_object_vars($this);
-    }
 }

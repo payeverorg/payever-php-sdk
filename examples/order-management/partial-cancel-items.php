@@ -25,11 +25,11 @@ try {
     /* Send partial items cancel request. */
     $cancelResponse = $paymentsApiClients->cancelItemsPaymentRequest($paymentId, [$paymentEntity], $deliveryFee);
 
-    /** @var PaymentResponse $cancelResult */
-    $cancelResult = $cancelResponse->getResponseEntity();
+    /** @var PaymentResponse $cancelResponseEntity */
+    $cancelResponseEntity = $cancelResponse->getResponseEntity();
 
     ResultPrinter::printText('API call result:');
-    ResultPrinter::printResultEntity($cancelResult->getResult());
+    ResultPrinter::printResultEntity($cancelResponseEntity->getResult());
 } catch (\Exception $e) {
     ResultPrinter::printError('API call failed: ' . $e->getMessage());
 }

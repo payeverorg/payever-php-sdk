@@ -102,14 +102,14 @@ class B2BApiClientTest extends TestCase
     public function testSearchCompany()
     {
         $request = new CompanySearchRequest();
-        $result = $this->b2bApiClient->searchCompany($request);
+        $result = $this->b2bApiClient->companySearchRequest($request);
         $this->assertNotEmpty($result);
     }
 
     public function testCompanyCredit()
     {
         $request = new CompanyCreditRequest();
-        $result = $this->b2bApiClient->companyCredit($request);
+        $result = $this->b2bApiClient->companyCreditRequest($request);
         $this->assertNotEmpty($result);
     }
 

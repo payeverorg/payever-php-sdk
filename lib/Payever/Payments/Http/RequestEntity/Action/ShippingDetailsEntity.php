@@ -37,6 +37,8 @@ use Payever\Sdk\Core\Http\MessageEntity\RequestEntity;
  */
 class ShippingDetailsEntity extends RequestEntity
 {
+    const UNDERSCORE_ON_SERIALIZATION = false;
+
     /** @var string $name */
     protected $shippingCarrier;
 
@@ -60,12 +62,4 @@ class ShippingDetailsEntity extends RequestEntity
 
     /** @var string $returnTrackingUrl */
     protected $returnTrackingUrl;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray($object = null)
-    {
-        return $object ? get_object_vars($object) : get_object_vars($this);
-    }
 }

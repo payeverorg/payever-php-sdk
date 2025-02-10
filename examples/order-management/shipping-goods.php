@@ -16,11 +16,11 @@ try {
     /* Send shipping goods request. */
     $shippingGoodsResponse = $paymentsApiClients->shippingGoodsPaymentRequest($paymentId);
 
-    /** @var PaymentResponse $shippingGoodsResult */
-    $shippingGoodsResult = $shippingGoodsResponse->getResponseEntity();
+    /** @var PaymentResponse $shippingGoodsResponseEntity */
+    $shippingGoodsResponseEntity = $shippingGoodsResponse->getResponseEntity();
 
     ResultPrinter::printText('API call result:');
-    ResultPrinter::printResultEntity($shippingGoodsResult->getResult());
+    ResultPrinter::printResultEntity($shippingGoodsResponseEntity->getResult());
 } catch (\Exception $e) {
     ResultPrinter::printError('API call failed: ' . $e->getMessage());
 }

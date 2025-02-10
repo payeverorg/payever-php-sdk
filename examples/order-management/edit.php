@@ -17,11 +17,11 @@ try {
     /* Send edit request. */
     $editResponse = $paymentsApiClients->editPaymentRequest($paymentId, $amount);
 
-    /** @var PaymentResponse $editResult */
-    $editResult = $editResponse->getResponseEntity();
+    /** @var PaymentResponse $editResponseEntity */
+    $editResponseEntity = $editResponse->getResponseEntity();
 
     ResultPrinter::printText('API call result:');
-    ResultPrinter::printResultEntity($editResult->getResult());
+    ResultPrinter::printResultEntity($editResponseEntity->getResult());
 } catch (\Exception $e) {
     ResultPrinter::printError('API call failed: ' . $e->getMessage());
 }

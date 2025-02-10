@@ -122,12 +122,12 @@ try {
     /* Send submit payment v3 request. */
     $submitPaymentResponse = $paymentsApiClients->submitPaymentRequestV3($requestEntity);
 
-    /** @var SubmitPaymentResponse $submitPaymentResult */
-    $submitPaymentResult = $submitPaymentResponse->getResponseEntity();
+    /** @var SubmitPaymentResponse $submitPaymentResponseEntity */
+    $submitPaymentResponseEntity = $submitPaymentResponse->getResponseEntity();
 
     ResultPrinter::printText('API call result:');
-    ResultPrinter::printText('Payment id: ' . $submitPaymentResult->getResult()->getId());
-    ResultPrinter::printText('Payment status: ' . $submitPaymentResult->getResult()->getStatus());
+    ResultPrinter::printText('Payment id: ' . $submitPaymentResponseEntity->getResult()->getId());
+    ResultPrinter::printText('Payment status: ' . $submitPaymentResponseEntity->getResult()->getStatus());
 } catch (\Exception $e) {
     ResultPrinter::printError('API call failed: ' . $e->getMessage());
 }
