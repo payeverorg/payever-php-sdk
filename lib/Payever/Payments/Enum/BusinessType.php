@@ -20,7 +20,7 @@ use Payever\Sdk\Core\Base\EnumerableConstants;
  */
 class BusinessType extends EnumerableConstants
 {
-    const B2C = 'b2c';
     const B2B = 'b2b';
+    const B2C = 'b2c';
     const MIXED = 'mixed';
 }

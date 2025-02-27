@@ -28,7 +28,8 @@ use Payever\Sdk\Payments\Http\ResponseEntity\PaymentResponse;
 class POSApiClient extends CommonApiClient implements POSApiClientInterface
 {
     const SUB_URL_POS_VERIFY = 'api/payment/verify/%s';
-    const SUB_URL_POS_UPDATE_REFERENCE = 'api/payment/edit/%s';
+    const SUB_URL_POS_UPDATE = 'api/payment/edit/%s';
+    const SUB_URL_POS_DOWNLOAD_CONTRACT = '%s/download-contract/%s?token=%s';
 
     /**
      * {@inheritdoc}
@@ -56,22 +57,38 @@ class POSApiClient extends CommonApiClient implements POSApiClientInterface
      *
      * @throws \Exception
      */
-    public function updateReferenceRequest($paymentId, $reference)
+    public function updateReferenceRequest($paymentId, $reference, $uniqueIdentifier = null)
     {
         $this->configuration->assertLoaded();
 
         $updateRequest = new UpdateReferenceRequest(['reference' => $reference]);
 
-        $request = RequestBuilder::post($this->getUpdateReferenceURL($paymentId))
+        $request = RequestBuilder::post($this->getUpdatePaymentURL($paymentId))
             ->addRawHeader(
                 $this->getToken(OauthTokenInterface::SCOPE_PAYMENT_ACTIONS)->getAuthorizationString()
             )
             ->contentTypeIsJson()
             ->setRequestEntity($updateRequest)
             ->setResponseEntity(new PaymentResponse())
+            ->addIdempotencyHeader($uniqueIdentifier)
             ->build();
 
         return $this->executeRequest($request);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \Exception
+     */
+    public function downloadContractRequest($paymentMethod, $paymentId, $savePath)
+    {
+        $this->configuration->assertLoaded();
+
+        $token = $this->getToken(OauthTokenInterface::SCOPE_CREATE_PAYMENT)->getAccessToken();
+        $url = $this->getDownloadContractURL($paymentMethod, $paymentId, $token);
+
+        return $this->getHttpClient()->download($url, $savePath);
     }
 
     /**
@@ -87,15 +104,29 @@ class POSApiClient extends CommonApiClient implements POSApiClientInterface
     }
 
     /**
-     * Returns URL for update reference path
+     * Returns URL for update payment path
      *
      * @param string $paymentId
      *
      * @return string
      */
-    protected function getUpdateReferenceURL($paymentId)
+    protected function getUpdatePaymentURL($paymentId)
     {
-        return $this->getBaseUrl() . sprintf(self::SUB_URL_POS_UPDATE_REFERENCE, $paymentId);
+        return $this->getBaseUrl() . sprintf(self::SUB_URL_POS_UPDATE, $paymentId);
+    }
+
+    /**
+     * Returns URL for update payment path
+     *
+     * @param string $paymentMethod
+     * @param string $paymentId
+     * @param string $token
+     *
+     * @return string
+     */
+    protected function getDownloadContractURL($paymentMethod, $paymentId, $token)
+    {
+        return $this->getBaseUrl() . sprintf(self::SUB_URL_POS_DOWNLOAD_CONTRACT, $paymentMethod, $paymentId, $token);
     }
 
     /**

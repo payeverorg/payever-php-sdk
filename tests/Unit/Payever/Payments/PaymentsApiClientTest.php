@@ -2,6 +2,7 @@
 
 namespace Payever\Tests\Unit\Payever\Payments;
 
+use Payever\Sdk\Payments\Enum\PaymentMethod;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Payever\Sdk\Core\Authorization\OauthTokenList;
@@ -133,6 +134,24 @@ class PaymentsApiClientTest extends TestCase
 
         $request = new SubmitPaymentV3Request();
         $result = $this->paymentsApiClient->submitPaymentV3Request($request);
+        $this->assertNotEmpty($result);
+    }
+
+    public function testRiskPaymentRequest()
+    {
+        $this->clientConfiguration->expects($this->once())->method('assertLoaded');
+
+        $paymentMethod = PaymentMethod::METHOD_STRIPE_CREDIT_CARD;
+        $result = $this->paymentsApiClient->riskPaymentRequest($paymentMethod);
+        $this->assertNotEmpty($result);
+    }
+
+    public function testTermsPaymentRequest()
+    {
+        $this->clientConfiguration->expects($this->once())->method('assertLoaded');
+
+        $variantId = 'test-variant-id';
+        $result = $this->paymentsApiClient->termsPaymentRequest($variantId);
         $this->assertNotEmpty($result);
     }
 

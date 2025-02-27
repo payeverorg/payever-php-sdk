@@ -143,11 +143,11 @@ $addressEntity
 
 $urls = new UrlsEntity();
 $urls
-    ->setSuccess('http::///your.domain/success?paymentId=--PAYMENT-ID--')
-    ->setPending('http::///your.domain/pending?paymentId=--PAYMENT-ID--')
-    ->setFailure('http::///your.domain/failure')
-    ->setCancel('http::///your.domain/cancel')
-    ->setNotification('http::///your.domain/notification?paymentId=--PAYMENT-ID--');
+    ->setSuccess('http:://your.domain/success?paymentId=--PAYMENT-ID--')
+    ->setPending('http:://your.domain/pending?paymentId=--PAYMENT-ID--')
+    ->setFailure('http:://your.domain/failure')
+    ->setCancel('http:://your.domain/cancel')
+    ->setNotification('http:://your.domain/notification?paymentId=--PAYMENT-ID--');
 
 $requestEntity = new CreatePaymentV3Request();
 $requestEntity

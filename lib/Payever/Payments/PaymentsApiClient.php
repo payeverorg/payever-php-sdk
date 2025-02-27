@@ -31,6 +31,7 @@ use Payever\Sdk\Payments\Http\RequestEntity\RefundPaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\ShippingGoodsPaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\SubmitPaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\SubmitPaymentV3Request;
+use Payever\Sdk\Payments\Http\RequestEntity\TermsPaymentRequest;
 use Payever\Sdk\Payments\Http\ResponseEntity\CreatePaymentResponse;
 use Payever\Sdk\Payments\Http\ResponseEntity\GetTransactionResponse;
 use Payever\Sdk\Payments\Http\ResponseEntity\ListPaymentOptionsResponse;
@@ -42,7 +43,9 @@ use Payever\Sdk\Payments\Http\ResponseEntity\PaymentResponse;
 use Payever\Sdk\Payments\Http\ResponseEntity\PaymentSettingsResponse;
 use Payever\Sdk\Payments\Http\ResponseEntity\RetrieveApiCallResponse;
 use Payever\Sdk\Payments\Http\ResponseEntity\RetrievePaymentResponse;
+use Payever\Sdk\Payments\Http\ResponseEntity\RiskPaymentResponse;
 use Payever\Sdk\Payments\Http\ResponseEntity\SubmitPaymentResponse;
+use Payever\Sdk\Payments\Http\ResponseEntity\TermsPaymentResponse;
 
 /**
  * This class represents payever Payments API Connector
@@ -59,6 +62,8 @@ class PaymentsApiClient extends CommonApiClient implements PaymentsApiClientInte
     const SUB_URL_CREATE_PAYMENT_V3 = 'api/v3/payment';
     const SUB_URL_CREATE_PAYMENT_SUBMIT = 'api/payment/submit';
     const SUB_URL_CREATE_PAYMENT_SUBMIT_V3 = 'api/v3/payment/submit';
+    const SUB_URL_RISK_PAYMENT = 'api/v2/payment/risk/%s';
+    const SUB_URL_TERMS_PAYMENT = 'api/payment/terms/%s';
     const SUB_URL_RETRIEVE_PAYMENT = 'api/payment/%s';
     const SUB_URL_LIST_PAYMENTS = 'api/payment';
     const SUB_URL_REFUND_PAYMENT = 'api/payment/refund/%s';
@@ -203,6 +208,46 @@ class PaymentsApiClient extends CommonApiClient implements PaymentsApiClientInte
      *
      * @throws \Exception
      */
+    public function riskPaymentRequest($paymentMethod)
+    {
+        $this->configuration->assertLoaded();
+
+        $request = RequestBuilder::post($this->getRiskPaymentURL($paymentMethod))
+            ->addRawHeader(
+                $this->getToken(OauthTokenInterface::SCOPE_CREATE_PAYMENT)->getAuthorizationString()
+            )
+            ->setResponseEntity(new RiskPaymentResponse())
+            ->build();
+
+        return $this->executeRequest($request, OauthTokenInterface::SCOPE_CREATE_PAYMENT);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \Exception
+     */
+    public function termsPaymentRequest($variantId, TermsPaymentRequest $paymentRequest = null)
+    {
+        $this->configuration->assertLoaded();
+
+        $request = RequestBuilder::post($this->getTermsPaymentURL($variantId))
+            ->addRawHeader(
+                $this->getToken(OauthTokenInterface::SCOPE_CREATE_PAYMENT)->getAuthorizationString()
+            )
+            ->contentTypeIsJson()
+            ->setRequestEntity($paymentRequest ?: new TermsPaymentRequest())
+            ->setResponseEntity(new TermsPaymentResponse())
+            ->build();
+
+        return $this->executeRequest($request, OauthTokenInterface::SCOPE_CREATE_PAYMENT);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \Exception
+     */
     public function retrievePaymentRequest($paymentId)
     {
         $this->configuration->assertLoaded();
@@ -222,7 +267,7 @@ class PaymentsApiClient extends CommonApiClient implements PaymentsApiClientInte
      *
      * @throws \Exception
      */
-    public function listPaymentsRequest(ListPaymentsRequest $listPaymentsRequest)
+    public function listPaymentsRequest(ListPaymentsRequest $listPaymentsRequest = null)
     {
         $this->configuration->assertLoaded();
 
@@ -230,7 +275,7 @@ class PaymentsApiClient extends CommonApiClient implements PaymentsApiClientInte
             ->addRawHeader(
                 $this->getToken(OauthTokenInterface::SCOPE_PAYMENT_ACTIONS)->getAuthorizationString()
             )
-            ->setRequestEntity($listPaymentsRequest)
+            ->setRequestEntity($listPaymentsRequest ?: new ListPaymentsRequest())
             ->setResponseEntity(new ListPaymentsResponse())
             ->build();
 
@@ -644,6 +689,28 @@ class PaymentsApiClient extends CommonApiClient implements PaymentsApiClientInte
     protected function getSubmitPaymentV3URL()
     {
         return $this->getBaseUrl() . self::SUB_URL_CREATE_PAYMENT_SUBMIT_V3;
+    }
+
+    /**
+     * Returns URL for Risk Payment path
+     *
+     * @return string
+     */
+    protected function getRiskPaymentURL($paymentMethod)
+    {
+        return $this->getBaseUrl() . sprintf(self::SUB_URL_RISK_PAYMENT, $paymentMethod);
+    }
+
+    /**
+     * Returns URL for Terms Payment path
+     *
+     * @param string $variantId
+     *
+     * @return string
+     */
+    protected function getTermsPaymentURL($variantId)
+    {
+        return $this->getBaseUrl() . sprintf(self::SUB_URL_TERMS_PAYMENT, $variantId);
     }
 
     /**

@@ -15,7 +15,7 @@ try {
 
     $b2bApiClient = new B2BApiClient($clientConfiguration);
 
-    $paymentId = 'c433798a-78c3-4778-92ae-bdc6322d4a54';
+    $paymentId = '--PAYMENT-ID--';
 
     $uploadPaymentRequest = new ClaimUploadPaymentRequest();
     $uploadPaymentRequest->setFileName('filename');

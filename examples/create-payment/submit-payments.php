@@ -5,6 +5,7 @@
  * See https://docs.payever.org/api/payments/v3/create-payment/submit-payments
  */
 
+use Payever\Sdk\Core\Enum\ChannelSet;
 use Payever\Sdk\Payments\Enum\PaymentMethod;
 use Payever\Sdk\Payments\Enum\Salutation;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\AttributesEntity;
@@ -20,13 +21,16 @@ use Payever\Sdk\Payments\Http\MessageEntity\Payment\ShippingOptionEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\UrlsEntity;
 use Payever\Sdk\Payments\Http\RequestEntity\SubmitPaymentV3Request;
 use Payever\Sdk\Payments\Http\ResponseEntity\submitPaymentResponse;
+use Payever\Sdk\Payments\PaymentsApiClient;
 
 try {
     /* Initialize the payever API library. */
     require_once '../bootstrap.php';
 
+    $paymentsApiClient = new PaymentsApiClient($clientConfiguration);
+
     $channelEntity = new ChannelEntity();
-    $channelEntity->setName('api');
+    $channelEntity->setName(ChannelSet::CHANNEL_API);
 
     $purchaseEntity = new PurchaseEntity();
     $purchaseEntity
@@ -37,9 +41,9 @@ try {
     $customerEntity = new CustomerEntity();
     $customerEntity
         ->setType('person')
-        ->setEmail('test@example.com')
-        ->setPhone('123456789')
-        ->setBirthdate(date('c'));
+        ->setEmail('john.doe@example.com')
+        ->setPhone('+450001122')
+        ->setBirthdate('1990-01-01');
 
     $cartItem = new CartItemV3Entity();
     $cartItem
@@ -87,11 +91,11 @@ try {
 
     $urls = new UrlsEntity();
     $urls
-        ->setSuccess('http:://127.0.0.1/success')
-        ->setPending('http:://127.0.0.1/pending')
-        ->setFailure('http:://127.0.0.1/failure')
-        ->setCancel('http:://127.0.0.1/cancel')
-        ->setNotification('http:://127.0.0.1/notification');
+        ->setSuccess('http:://your.domain/success')
+        ->setPending('http:://your.domain/pending')
+        ->setFailure('http:://your.domain/failure')
+        ->setCancel('http:://your.domain/cancel')
+        ->setNotification('http:://your.domain/notification');
 
     $shippingOptionEntity = new ShippingOptionEntity();
     $shippingOptionEntity
@@ -120,7 +124,7 @@ try {
         ->setPaymentData(new PaymentDataEntity());
 
     /* Send submit payment v3 request. */
-    $submitPaymentResponse = $paymentsApiClients->submitPaymentRequestV3($requestEntity);
+    $submitPaymentResponse = $paymentsApiClient->submitPaymentV3Request($requestEntity);
 
     /** @var SubmitPaymentResponse $submitPaymentResponseEntity */
     $submitPaymentResponseEntity = $submitPaymentResponse->getResponseEntity();

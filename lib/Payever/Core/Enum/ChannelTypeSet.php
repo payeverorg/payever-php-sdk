@@ -20,15 +20,15 @@ use Payever\Sdk\Core\Base\EnumerableConstants;
  */
 class ChannelTypeSet extends EnumerableConstants
 {
-    const ECOMMERCE = 'ecommerce';
-    const CLICK_COLLECT = 'click_collect';
-    const QR = 'qr';
-    const EMAIL = 'email';
-    const SMS = 'sms';
-    const TERMINAL = 'terminal';
-    const SELF_CHECKOUT = 'self_checkout';
-    const EXTERNAL = 'external';
+    const CLICK_COLLECT   = 'click_collect';
+    const ECOMMERCE       = 'ecommerce';
+    const EMAIL           = 'email';
+    const EXTERNAL        = 'external';
     const FINANCE_EXPRESS = 'finance_express';
-    const SOCIAL = 'social';
-    const MESSENGER = 'messenger';
+    const MESSENGER       = 'messenger';
+    const QR              = 'qr';
+    const SELF_CHECKOUT   = 'self_checkout';
+    const SMS             = 'sms';
+    const SOCIAL          = 'social';
+    const TERMINAL        = 'terminal';
 }

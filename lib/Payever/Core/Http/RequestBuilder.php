@@ -13,7 +13,7 @@
 
 namespace Payever\Sdk\Core\Http;
 
-use Payever\Sdk\Core\Engine;
+use Payever\Sdk\Engine;
 use Payever\Sdk\Core\Http\MessageEntity\RequestEntity;
 use Payever\Sdk\Core\Http\MessageEntity\ResponseEntity;
 

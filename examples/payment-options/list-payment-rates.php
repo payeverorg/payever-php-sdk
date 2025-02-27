@@ -6,17 +6,20 @@
  */
 
 use Payever\Sdk\Payments\Http\ResponseEntity\ListPaymentRatesResponse;
+use Payever\Sdk\Payments\PaymentsApiClient;
 
 try {
     /* Initialize the payever API library. */
     require_once '../bootstrap.php';
+
+    $paymentsApiClient = new PaymentsApiClient($clientConfiguration);
 
     $variantId = 'payment-method-variant-id';
     $amount = 200;
     $downpayment = 100;
 
     /* Get the all payment rates. */
-    $paymentRatesResponse = $paymentsApiClients->listPaymentRatesRequest($variantId, $amount, $downpayment);
+    $paymentRatesResponse = $paymentsApiClient->listPaymentRatesRequest($variantId, $amount, $downpayment);
 
     /** @var ListPaymentRatesResponse $paymentRatesResponseEntity */
     $paymentRatesResponseEntity = $paymentRatesResponse->getResponseEntity();

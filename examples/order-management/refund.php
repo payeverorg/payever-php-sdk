@@ -6,16 +6,19 @@
  */
 
 use Payever\Sdk\Payments\Http\ResponseEntity\PaymentResponse;
+use Payever\Sdk\Payments\PaymentsApiClient;
 
 try {
     /* Initialize the payever API library. */
     require_once '../bootstrap.php';
 
-    $paymentId = 'c433798a-78c3-4778-92ae-bdc6322d4a54';
+    $paymentsApiClient = new PaymentsApiClient($clientConfiguration);
+
+    $paymentId = '--PAYMENT-ID--';
     $totalAmount = 500;
 
     /* Send refund request. */
-    $refundResponse = $paymentsApiClients->refundPaymentRequest($paymentId, $totalAmount);
+    $refundResponse = $paymentsApiClient->refundPaymentRequest($paymentId, $totalAmount);
 
     /** @var PaymentResponse $refundResponseEntity */
     $refundResponseEntity = $refundResponse->getResponseEntity();

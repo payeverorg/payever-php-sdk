@@ -88,7 +88,7 @@ class B2BApiClient extends CommonApiClient implements B2BApiClientInterface
      *
      * @throws \Exception
      */
-    public function settlePaymentRequest($paymentId, SettlePaymentRequest $paymentRequest = null)
+    public function settlePaymentRequest($paymentId, $uniqueIdentifier = null)
     {
         $this->configuration->assertLoaded();
 
@@ -97,8 +97,9 @@ class B2BApiClient extends CommonApiClient implements B2BApiClientInterface
                 $this->getToken(OauthTokenInterface::SCOPE_PAYMENT_ACTIONS)->getAuthorizationString()
             )
             ->contentTypeIsJson()
-            ->setRequestEntity($paymentRequest ?: new SettlePaymentRequest())
+            ->setRequestEntity(new SettlePaymentRequest())
             ->setResponseEntity(new PaymentResponse())
+            ->addIdempotencyHeader($uniqueIdentifier)
             ->build();
 
         return $this->executeRequest($request);
@@ -109,7 +110,7 @@ class B2BApiClient extends CommonApiClient implements B2BApiClientInterface
      *
      * @throws \Exception
      */
-    public function invoicePaymentRequest($paymentId, $amount = null, $uniqueIdentifier = null)
+    public function invoicePaymentRequest($paymentId, $amount, $uniqueIdentifier = null)
     {
         $this->configuration->assertLoaded();
 

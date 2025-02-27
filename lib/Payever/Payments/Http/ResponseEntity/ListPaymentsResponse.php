@@ -15,21 +15,16 @@ namespace Payever\Sdk\Payments\Http\ResponseEntity;
 
 use Payever\Sdk\Core\Http\MessageEntity\ResponseEntity;
 use Payever\Sdk\Payments\Http\ResponseEntity\Call\ListPaymentsCall;
-use Payever\Sdk\Payments\Http\ResponseEntity\Result\ListPaymentsResult;
+use Payever\Sdk\Payments\Http\ResponseEntity\Result\PaymentResult;
 
 /**
  * This class represents List Payments ResponseInterface Entity
  *
- * @method string                     getRedirectUrl()
- * @method $this                      setRedirectUrl(string $url)
- * @method ListPaymentsCall           getCall()
- * @method array|ListPaymentsResult[] getResult()
+ * @method ListPaymentsCall      getCall()
+ * @method array|PaymentResult[] getResult()
  */
 class ListPaymentsResponse extends ResponseEntity
 {
-    /** @var string $redirectUrl */
-    protected $redirectUrl;
-
     /**
      * {@inheritdoc}
      */
@@ -46,7 +41,7 @@ class ListPaymentsResponse extends ResponseEntity
         $this->result = [];
 
         foreach ($result as $item) {
-            $this->result[] = new ListPaymentsResult($item);
+            $this->result[] = new PaymentResult($item);
         }
     }
 }

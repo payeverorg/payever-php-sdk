@@ -44,4 +44,17 @@ interface POSApiClientInterface extends CommonApiClientInterface
      * @return ResponseInterface
      */
     public function updateReferenceRequest($paymentId, $reference);
+
+    /**
+     * Sends a request to download contract
+     *
+     * @link https://docs.payever.org/api/payments/v3/pos-services/download-contract Documentation
+     *
+     * @param string $paymentMethod Payment Method
+     * @param string $paymentId Payment ID
+     * @param string $savePath File Path
+     *
+     * @return ResponseInterface
+     */
+    public function downloadContractRequest($paymentMethod, $paymentId, $savePath);
 }

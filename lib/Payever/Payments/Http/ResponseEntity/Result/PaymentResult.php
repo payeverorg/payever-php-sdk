@@ -26,7 +26,6 @@ use Payever\Sdk\Payments\Http\MessageEntity\Payment\ShippingOptionEntity;
  * @method string               getId()
  * @method string               getStatus()
  * @method string               getSpecificStatus()
- * @method string               getColorState()
  * @method string               getMerchantName()
  * @method string               getCustomerName()
  * @method string               getCustomerEmail()
@@ -49,10 +48,10 @@ use Payever\Sdk\Payments\Http\MessageEntity\Payment\ShippingOptionEntity;
  * @method array                getPaymentDetailsArray()
  * @method ShippingOptionEntity getShippingOption()
  * @method CartItemEntity[]     getItems()
+ * @method \stdClass[]          getHistory()
  * @method $this                setId(string $id)
  * @method $this                setStatus(string $status)
  * @method $this                setSpecificStatus(string $specificStatus)
- * @method $this                setColorState(string $colorState)
  * @method $this                setMerchantName(string $merchantName)
  * @method $this                setCustomerName(string $customerName)
  * @method $this                setCustomerEmail(string $customerEmail)
@@ -67,6 +66,7 @@ use Payever\Sdk\Payments\Http\MessageEntity\Payment\ShippingOptionEntity;
  * @method $this                setDeliveryFee(float $deliveryFee)
  * @method $this                setPaymentFee(float $paymentFee)
  * @method $this                setDownPayment(float $downPayment)
+ * @method $this                setHistory(array $history)
  *
  * @SuppressWarnings(PHPMD.ShortVariable)
  * @SuppressWarnings(PHPMD.StaticAccess)
@@ -83,9 +83,6 @@ class PaymentResult extends ResultEntity
     /** @var string $specificStatus */
     protected $specificStatus;
 
-    /** @var string $colorState */
-    protected $colorState;
-
     /** @var string $merchantName */
     protected $merchantName;
 
@@ -97,6 +94,9 @@ class PaymentResult extends ResultEntity
 
     /** @var string $paymentType */
     protected $paymentType;
+
+    /** @var string $paymentIssuer */
+    protected $paymentIssuer;
 
     /** @var \DateTime|bool $createdAt */
     protected $createdAt;
@@ -121,6 +121,12 @@ class PaymentResult extends ResultEntity
 
     /** @var float $total */
     protected $total;
+
+    /** @var float $initialTotal */
+    protected $initialTotal;
+
+    /** @var float $remainingTotal */
+    protected $remainingTotal;
 
     /** @var string $currency */
     protected $currency;
@@ -151,6 +157,9 @@ class PaymentResult extends ResultEntity
 
     /** @var CartItemEntity[] */
     protected $items;
+
+    /** @var \stdClass[]|array $history */
+    protected $history;
 
     /**
      * Sets Created At
@@ -300,15 +309,5 @@ class PaymentResult extends ResultEntity
         }
 
         return $this;
-    }
-
-    /**
-     * Gets payment fee value
-     *
-     * @return float
-     */
-    public function getFee()
-    {
-        return $this->getPaymentFee();
     }
 }

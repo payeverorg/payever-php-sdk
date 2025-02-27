@@ -11,16 +11,16 @@
  * @link      https://docs.payever.org/api/payments/v3/getting-started-v3
  */
 
-namespace Payever\Sdk\Core;
+namespace Payever\Sdk;
 
 // @codeCoverageIgnoreStart
 // phpcs:disable PSR1.Files.SideEffects
-define('PEI_CORE_VERSION', '0.0.2');
-define('PEI_CORE_MAJOR_VERSION', 0);
+define('PEI_CORE_VERSION', '1.0.0');
+define('PEI_CORE_MAJOR_VERSION', 1);
 define('PEI_CORE_MINOR_VERSION', 0);
-define('PEI_CORE_RELEASE_VERSION', 2);
+define('PEI_CORE_RELEASE_VERSION', 0);
 
-define('PEI_NAMESPACE', 'Payever\Sdk\Core');
+define('PEI_NAMESPACE', 'Payever\Sdk');
 
 if (version_compare(PHP_VERSION, '5.6.0', '<')) {
     throw new \RuntimeException('payever SDK requires PHP version 5.6 or higher.');
@@ -53,9 +53,8 @@ class Engine
                     $class = substr($className, strlen(PEI_NAMESPACE));
 
                     $filePath = sprintf(
-                        '%s%s..%s.php',
+                        '%s%s.php',
                         __DIR__,
-                        DIRECTORY_SEPARATOR,
                         str_replace('\\', DIRECTORY_SEPARATOR, $class)
                     );
 

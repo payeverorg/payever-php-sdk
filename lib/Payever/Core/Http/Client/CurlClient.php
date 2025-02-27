@@ -219,7 +219,7 @@ class CurlClient implements HttpClientInterface, LoggerAwareInterface
 
         if ($response->isFailed()) {
             throw new PayeverCommunicationException(
-                $response->getResponseEntity()->getErrorDescription()
+                $response->getResponseEntity()->getErrorDescription() ?: $response->getResponseEntity()->getError()
             );
         }
 
@@ -271,7 +271,15 @@ class CurlClient implements HttpClientInterface, LoggerAwareInterface
             sprintf('HTTP download Request %s %s', $fileUrl, $savePath)
         );
 
+        if (is_dir($savePath)) {
+            throw new \RuntimeException('The save path cannot be a directory');
+        }
+
         $filePointer = fopen($savePath, 'w+');
+        if (!$filePointer) {
+            throw new \RuntimeException('File is not writable');
+        }
+
         $ch = curl_init($fileUrl);
 
         if ($ch === false) {

@@ -24,6 +24,7 @@ use Payever\Sdk\Payments\Http\RequestEntity\ListPaymentsRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\ShippingGoodsPaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\SubmitPaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\SubmitPaymentV3Request;
+use Payever\Sdk\Payments\Http\RequestEntity\TermsPaymentRequest;
 
 /**
  * Interface represents payever Payments API Connector
@@ -90,6 +91,29 @@ interface PaymentsApiClientInterface extends CommonApiClientInterface
     public function submitPaymentV3Request(SubmitPaymentV3Request $submitPaymentRequest);
 
     /**
+     * Requests payment risks
+     *
+     * @link https://docs.payever.org/api/payments/v3/create-payment/submit-payments Documentation
+     *
+     * @param string $paymentMethod
+     *
+     * @return ResponseInterface
+     */
+    public function riskPaymentRequest($paymentMethod);
+
+    /**
+     * Requests payment terms
+     *
+     * @link https://docs.payever.org/api/payments/v3/create-payment/submit-payments Documentation
+     *
+     * @param string              $variantId
+     * @param TermsPaymentRequest $paymentRequest
+     *
+     * @return ResponseInterface
+     */
+    public function termsPaymentRequest($variantId, TermsPaymentRequest $paymentRequest = null);
+
+    /**
      * Requests payment details
      *
      * @link https://docs.payever.org/api/payments/v3/view-payments/retrieve-payment Documentation
@@ -109,7 +133,7 @@ interface PaymentsApiClientInterface extends CommonApiClientInterface
      *
      * @return ResponseInterface
      */
-    public function listPaymentsRequest(ListPaymentsRequest $listPaymentsRequest);
+    public function listPaymentsRequest(ListPaymentsRequest $listPaymentsRequest = null);
 
     /**
      * Sends a request to refund payment

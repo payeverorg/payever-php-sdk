@@ -9,16 +9,19 @@ use Payever\Sdk\Payments\Http\RequestEntity\Action\PaymentItemEntity;
 use Payever\Sdk\Payments\Http\RequestEntity\Action\ShippingDetailsEntity;
 use Payever\Sdk\Payments\Http\RequestEntity\ShippingGoodsPaymentRequest;
 use Payever\Sdk\Payments\Http\ResponseEntity\PaymentResponse;
+use Payever\Sdk\Payments\PaymentsApiClient;
 
 try {
     /* Initialize the payever API library. */
     require_once '../bootstrap.php';
 
-    $paymentId = 'c433798a-78c3-4778-92ae-bdc6322d4a54';
+    $paymentsApiClient = new PaymentsApiClient($clientConfiguration);
+
+    $paymentId = '--PAYMENT-ID--';
 
     $paymentEntity = new PaymentItemEntity();
     $paymentEntity
-        ->setIdentifier('28')
+        ->setIdentifier('product-1')
         ->setName('Product 1')
         ->setPrice(100)
         ->setQuantity(1);
@@ -41,7 +44,7 @@ try {
         ->setShippingDetails($shippingDetails);
 
     /* Send partial shipping goods request. */
-    $shippingGoodsResponse = $paymentsApiClients->shippingGoodsPaymentRequest($paymentId, $shippingGoodsRequest);
+    $shippingGoodsResponse = $paymentsApiClient->shippingGoodsPaymentRequest($paymentId, $shippingGoodsRequest);
 
     /** @var PaymentResponse $shippingGoodsResponseEntity */
     $shippingGoodsResponseEntity = $shippingGoodsResponse->getResponseEntity();

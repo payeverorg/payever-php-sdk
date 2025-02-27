@@ -47,16 +47,6 @@ class VerifyPaymentRequest extends RequestEntity
     protected $custom;
 
     /**
-     * {@inheritdoc}
-     */
-    public function isValid()
-    {
-        return parent::isValid() &&
-            $this->code && is_numeric($this->code) &&
-            $this->verified && is_bool($this->verified);
-    }
-
-    /**
      * Set Seller.
      *
      * @param SellerEntity|array|string $seller

@@ -34,6 +34,8 @@ use Payever\Sdk\Core\Base\MessageEntity;
  * @method $this            setFloor(string $floor)
  * @method $this            setDoor(string $door)
  * @method $this            setBlock(string $block)
+ *
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class PaymentDataEntity extends MessageEntity
 {

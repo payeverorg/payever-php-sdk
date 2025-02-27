@@ -5,6 +5,7 @@
  * See https://docs.payever.org/api/payments/v3/create-payment/create-payments
  */
 
+use Payever\Sdk\Core\Enum\ChannelSet;
 use Payever\Sdk\Payments\Enum\PaymentMethod;
 use Payever\Sdk\Payments\Enum\Salutation;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\AttributesEntity;
@@ -19,13 +20,16 @@ use Payever\Sdk\Payments\Http\MessageEntity\Payment\ShippingOptionEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\UrlsEntity;
 use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentV3Request;
 use Payever\Sdk\Payments\Http\ResponseEntity\CreatePaymentResponse;
+use Payever\Sdk\Payments\PaymentsApiClient;
 
 try {
     /* Initialize the payever API library. */
     require_once '../bootstrap.php';
 
+    $paymentsApiClient = new PaymentsApiClient($clientConfiguration);
+
     $channelEntity = new ChannelEntity();
-    $channelEntity->setName('api');
+    $channelEntity->setName(ChannelSet::CHANNEL_API);
 
     $purchaseEntity = new PurchaseEntity();
     $purchaseEntity
@@ -36,8 +40,8 @@ try {
     $customerEntity = new CustomerEntity();
     $customerEntity
         ->setType('person')
-        ->setEmail('test@example.com')
-        ->setPhone('123456789')
+        ->setEmail('john.doe@example.com')
+        ->setPhone('+450001122')
         ->setBirthdate('1990-01-01');
 
     $cartItem = new CartItemV3Entity();
@@ -105,7 +109,6 @@ try {
         ->setChannel($channelEntity)
         ->setReference('reference-id')
         ->setPaymentMethod(PaymentMethod::METHOD_SANTANDER_DE_INSTALLMENT)
-        ->setPaymentMethod(PaymentMethod::METHOD_STRIPE_CREDIT_CARD)
         ->setClientIp('192.168.1.1')
         ->setPurchase($purchaseEntity)
         ->setCustomer($customerEntity)
@@ -115,7 +118,7 @@ try {
         ->setPaymentData(new PaymentDataEntity());
 
     /* Send create payment v3 request. */
-    $createPaymentResponse = $paymentsApiClients->createPaymentV3Request($requestEntity);
+    $createPaymentResponse = $paymentsApiClient->createPaymentV3Request($requestEntity);
 
     /** @var CreatePaymentResponse $createPaymentResponseEntity */
     $createPaymentResponseEntity = $createPaymentResponse->getResponseEntity();

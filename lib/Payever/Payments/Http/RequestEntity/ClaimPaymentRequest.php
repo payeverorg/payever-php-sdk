@@ -21,12 +21,14 @@ use Payever\Sdk\Core\Http\MessageEntity\RequestEntity;
  * @method bool   getIsNonInclusive()
  * @method bool   getIsLegal()
  * @method bool   getIsDisputed()
+ * @method bool   getIsFraud()
  * @method bool   getIsGuaranteeExisting()
  * @method int    getPolicyId()
  * @method string getBusinessUnitCode()
  * @method string getExtensionId()
  * @method $this  setIsNonInclusive(bool $isNonInclusive)
  * @method $this  setIsLegal(bool $isLegal)
+ * @method $this  setIsFraud(bool $isFraud)
  * @method $this  setIsDisputed(bool $isDisputed)
  * @method $this  setIsGuaranteeExisting(bool $isGuaranteeExisting)
  * @method $this  setPolicyId(string $policyId)
@@ -42,6 +44,9 @@ class ClaimPaymentRequest extends RequestEntity
 
     /** @var bool $isLegal */
     protected $isLegal;
+
+    /** @var bool $isFraud */
+    protected $isFraud;
 
     /** @var bool $isDisputed */
     protected $isDisputed;
@@ -68,11 +73,14 @@ class ClaimPaymentRequest extends RequestEntity
 
     /**
      * Checks if values are either null or booleans.
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     private function isOptionalBooleansValid()
     {
         return (!$this->isNonInclusive || is_bool($this->isNonInclusive))
             && (!$this->isLegal || is_bool($this->isLegal))
+            && (!$this->isFraud || is_bool($this->isFraud))
             && (!$this->isDisputed || is_bool($this->isDisputed))
             && (!$this->isGuaranteeExisting || is_bool($this->isGuaranteeExisting));
     }

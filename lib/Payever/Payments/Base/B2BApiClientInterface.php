@@ -19,7 +19,6 @@ use Payever\Sdk\Payments\Http\RequestEntity\ClaimPaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\ClaimUploadPaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\CompanyCreditRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\CompanySearchRequest;
-use Payever\Sdk\Payments\Http\RequestEntity\SettlePaymentRequest;
 
 /**
  * Interface represents payever Payments API Connector
@@ -53,12 +52,12 @@ interface B2BApiClientInterface extends CommonApiClientInterface
      *
      * @link https://docs.payever.org/api/payments/v3/b2b-services/settle-invoice Documentation
      *
-     * @param string               $paymentId Payment ID
-     * @param SettlePaymentRequest $paymentRequest Specify the settle payment request.
+     * @param string $paymentId Payment ID
+     * @param null|string $uniqueIdentifier
      *
      * @return ResponseInterface
      */
-    public function settlePaymentRequest($paymentId, SettlePaymentRequest $paymentRequest = null);
+    public function settlePaymentRequest($paymentId, $uniqueIdentifier = null);
 
     /**
      * Sends a request to invoice payment
@@ -66,12 +65,12 @@ interface B2BApiClientInterface extends CommonApiClientInterface
      * @link https://docs.payever.org/api/payments/v3/b2b-services/partial-settle-invoice Documentation
      *
      * @param string      $paymentId Payment ID
-     * @param null|float  $amount
+     * @param float       $amount
      * @param null|string $uniqueIdentifier
      *
      * @return ResponseInterface
      */
-    public function invoicePaymentRequest($paymentId, $amount = null, $uniqueIdentifier = null);
+    public function invoicePaymentRequest($paymentId, $amount, $uniqueIdentifier = null);
 
     /**
      * Sends a request to claim payment

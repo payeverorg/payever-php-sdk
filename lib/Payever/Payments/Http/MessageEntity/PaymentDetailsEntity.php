@@ -53,6 +53,7 @@ use Payever\Sdk\Core\Base\MessageEntity;
  * @method \DateTime|false         getBirthday()
  * @method string                  getFrontendFinishUrl()
  * @method string                  getFrontendCancelUrl()
+ * @method string                  getGetPaymentStatusUrl()
  * @method string                  getTransactionId()
  * @method string                  getRedirectUrl()
  * @method $this                   setId(string $id)
@@ -87,6 +88,7 @@ use Payever\Sdk\Core\Base\MessageEntity;
  * @method $this                   setUsageText(string $usageText)
  * @method $this                   setFrontendFinishUrl(string $frontendFinishUrl)
  * @method $this                   setFrontendCancelUrl(string $frontendCancelUrl)
+ * @method $this                   setGetPaymentStatusUrl(string $getPaymentStatusUrl)
  * @method $this                   setTransactionId(string $transactionId)
  * @method $this                   setRedirectUrl(string $redirectUrl)
  *
@@ -186,25 +188,28 @@ class PaymentDetailsEntity extends MessageEntity
     /** @var bool $prevEmploymentDetails */
     protected $prevEmploymentDetails;
 
-    /** @var string */
+    /** @var string $uniqueId */
     protected $uniqueId;
 
-    /** @var string */
+    /** @var string $usageText */
     protected $usageText;
 
-    /** @var \DateTime|bool */
+    /** @var \DateTime|bool $birthday */
     protected $birthday;
 
-    /** @var string */
+    /** @var string $frontendFinishUrl */
     protected $frontendFinishUrl;
 
-    /** @var string */
+    /** @var string $frontendCancelUrl */
     protected $frontendCancelUrl;
 
-    /** @var string */
+    /** @var string $getPaymentStatusUrl */
+    protected $getPaymentStatusUrl;
+
+    /** @var string $transactionId */
     protected $transactionId;
 
-    /** @var string */
+    /** @var string $redirectUrl */
     protected $redirectUrl;
 
     /**

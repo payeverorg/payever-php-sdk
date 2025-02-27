@@ -6,13 +6,16 @@
  */
 
 use Payever\Sdk\Payments\Http\ResponseEntity\ListPaymentOptionsResponse;
+use Payever\Sdk\Payments\PaymentsApiClient;
 
 try {
     /* Initialize the payever API library. */
     require_once '../bootstrap.php';
 
+    $paymentsApiClient = new PaymentsApiClient($clientConfiguration);
+
     /* Get the all payment options. */
-    $paymentOptionsResponse = $paymentsApiClients->listPaymentOptionsWithVariantsRequest();
+    $paymentOptionsResponse = $paymentsApiClient->listPaymentOptionsWithVariantsRequest();
 
     /** @var ListPaymentOptionsResponse $paymentOptionsResponseEntity */
     $paymentOptionsResponseEntity = $paymentOptionsResponse->getResponseEntity();
