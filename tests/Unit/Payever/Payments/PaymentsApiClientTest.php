@@ -13,12 +13,10 @@ use Payever\Sdk\Core\Http\Client\CurlClient;
 use Payever\Sdk\Core\Http\Response;
 use Payever\Sdk\Payments\Http\RequestEntity\Action\PaymentItemEntity;
 use Payever\Sdk\Payments\Http\RequestEntity\AuthorizePaymentRequest;
-use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentV2Request;
-use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentV3Request;
+use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\ListPaymentsRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\ShippingGoodsPaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\SubmitPaymentRequest;
-use Payever\Sdk\Payments\Http\RequestEntity\SubmitPaymentV3Request;
 use Payever\Sdk\Payments\PaymentsApiClient;
 use Psr\Log\NullLogger;
 
@@ -101,21 +99,12 @@ class PaymentsApiClientTest extends TestCase
         );
     }
 
-    public function testCreatePaymentV2Request()
+    public function testCreatePaymentRequest()
     {
         $this->clientConfiguration->expects($this->once())->method('assertLoaded');
 
-        $request = new CreatePaymentV2Request();
-        $result = $this->paymentsApiClient->createPaymentV2Request($request);
-        $this->assertNotEmpty($result);
-    }
-
-    public function testCreatePaymentV3Request()
-    {
-        $this->clientConfiguration->expects($this->once())->method('assertLoaded');
-
-        $request = new CreatePaymentV3Request();
-        $result = $this->paymentsApiClient->createPaymentV3Request($request);
+        $request = new CreatePaymentRequest();
+        $result = $this->paymentsApiClient->createPaymentRequest($request);
         $this->assertNotEmpty($result);
     }
 
@@ -125,15 +114,6 @@ class PaymentsApiClientTest extends TestCase
 
         $request = new SubmitPaymentRequest();
         $result = $this->paymentsApiClient->submitPaymentRequest($request);
-        $this->assertNotEmpty($result);
-    }
-
-    public function testSubmitPaymentRequestV3()
-    {
-        $this->clientConfiguration->expects($this->once())->method('assertLoaded');
-
-        $request = new SubmitPaymentV3Request();
-        $result = $this->paymentsApiClient->submitPaymentV3Request($request);
         $this->assertNotEmpty($result);
     }
 

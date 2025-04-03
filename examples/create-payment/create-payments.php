@@ -9,16 +9,16 @@ use Payever\Sdk\Core\Enum\ChannelSet;
 use Payever\Sdk\Payments\Enum\PaymentMethod;
 use Payever\Sdk\Payments\Enum\Salutation;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\AttributesEntity;
-use Payever\Sdk\Payments\Http\MessageEntity\Payment\CartItemV3Entity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\CartItemEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\ChannelEntity;
-use Payever\Sdk\Payments\Http\MessageEntity\Payment\CustomerAddressV3Entity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\CustomerAddressEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\CustomerEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\DimensionsEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\PaymentDataEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\PurchaseEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\ShippingOptionEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\UrlsEntity;
-use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentV3Request;
+use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentRequest;
 use Payever\Sdk\Payments\Http\ResponseEntity\CreatePaymentResponse;
 use Payever\Sdk\Payments\PaymentsApiClient;
 
@@ -44,7 +44,7 @@ try {
         ->setPhone('+450001122')
         ->setBirthdate('1990-01-01');
 
-    $cartItem = new CartItemV3Entity();
+    $cartItem = new CartItemEntity();
     $cartItem
         ->setName('Product 1')
         ->setIdentifier('product-1')
@@ -76,7 +76,7 @@ try {
         $cartItem->setAttributes($attributes);
     }
 
-    $addressEntity = new CustomerAddressV3Entity();
+    $addressEntity = new CustomerAddressEntity();
     $addressEntity
         ->setFirstName('Test')
         ->setLastName('Test')
@@ -104,7 +104,7 @@ try {
         ->setTaxAmount(19)
         ->setTaxRate(19);
 
-    $requestEntity = new CreatePaymentV3Request();
+    $requestEntity = new CreatePaymentRequest();
     $requestEntity
         ->setChannel($channelEntity)
         ->setReference('reference-id')
@@ -117,8 +117,8 @@ try {
         ->setUrls($urls)
         ->setPaymentData(new PaymentDataEntity());
 
-    /* Send create payment v3 request. */
-    $createPaymentResponse = $paymentsApiClient->createPaymentV3Request($requestEntity);
+    /* Send create payment request. */
+    $createPaymentResponse = $paymentsApiClient->createPaymentRequest($requestEntity);
 
     /** @var CreatePaymentResponse $createPaymentResponseEntity */
     $createPaymentResponseEntity = $createPaymentResponse->getResponseEntity();

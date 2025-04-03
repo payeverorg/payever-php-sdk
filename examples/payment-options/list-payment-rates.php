@@ -15,7 +15,7 @@ try {
     $paymentsApiClient = new PaymentsApiClient($clientConfiguration);
 
     $variantId = 'payment-method-variant-id';
-    $amount = 200;
+    $amount = 1000;
     $downpayment = 100;
 
     /* Get the all payment rates. */

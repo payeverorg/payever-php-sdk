@@ -51,6 +51,8 @@ class PaymentMethod extends EnumerableConstants
     const METHOD_SANTANDER_NO_INVOICE          = 'santander_invoice_no';
     const METHOD_SANTANDER_SE_INSTALLMENT      = 'santander_installment_se';
     const METHOD_SOFORT                        = 'sofort';
+    const METHOD_CREDIT_CARD                   = 'credit_card';
+    const METHOD_DIRECT_DEBIT                  = 'direct_debit';
     const METHOD_STRIPE_CREDIT_CARD            = 'stripe';
     const METHOD_STRIPE_DIRECT_DEBIT           = 'stripe_directdebit';
     const METHOD_SWEDBANK_CREDIT_CARD          = 'swedbank_creditcard';
@@ -58,6 +60,7 @@ class PaymentMethod extends EnumerableConstants
     const METHOD_SWISH                         = 'swish';
     const METHOD_TRUSTLY                       = 'trustly';
     const METHOD_VERIFONE_CREDIT_CARD          = 'verifone_creditcard';
+    const METHOD_VERIFONE_BNPL                 = 'verifone_bnpl';
     const METHOD_ZINIA_BNPL                    = 'zinia_bnpl';
     const METHOD_ZINIA_BNPL_DE                 = 'zinia_bnpl_de';
     const METHOD_ZINIA_INSTALLMENT             = 'zinia_installment';

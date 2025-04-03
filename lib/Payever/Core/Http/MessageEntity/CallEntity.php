@@ -20,10 +20,12 @@ use Payever\Sdk\Core\Base\MessageEntity;
  *
  * @method string          getId()
  * @method string          getStatus()
+ * @method string          getType()
  * @method string          getBusinessId()
  * @method \DateTime|false getCreatedAt()
  * @method $this           setId(string $id)
  * @method $this           setStatus(string $status)
+ * @method $this           setType(string $type)
  * @method $this           setBusinessId(string $businessId)
  *
  * @SuppressWarnings(PHPMD.ShortVariable)
@@ -35,6 +37,9 @@ class CallEntity extends MessageEntity
 
     /** @var string $status */
     protected $status;
+
+    /** @var string $type */
+    protected $type;
 
     /** @var string $businessId */
     protected $businessId;

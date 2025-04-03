@@ -2,78 +2,166 @@
 
 namespace Payever\Tests\Unit\Payever\Payments\Http\RequestEntity;
 
-use Payever\Sdk\Core\Base\MessageEntity;
+use PHPUnit\Framework\TestCase;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\AttributesEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\CartItemEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\ChannelEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\CompanyEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\CustomerAddressEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\CustomerEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\OptionsEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\PaymentDataEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\PurchaseEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\SellerEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\ShippingOptionEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\SplitItemEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\UrlsEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\VerifyEntity;
 use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentRequest;
-use Payever\Tests\Unit\Payever\Core\Http\AbstractRequestEntityTestCase;
-use Payever\Tests\Unit\Payever\Payments\Http\MessageEntity\Payment\CartItemEntityTest;
 
 /**
- * Class CreatePaymentRequestTest
+ * Class CreatePaymentV3RequestTest
  *
  * @see \Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentRequest
  */
-class CreatePaymentRequestTest extends AbstractRequestEntityTestCase
+class CreatePaymentRequestTest extends TestCase
 {
-    protected static $scheme = array(
-        'channel' => 'shopware',
-        'channel_set_id' => 10,
-        'payment_method' => 'stripe',
-        'amount' => 100,
-        'fee' => 10,
-        'order_id' => 'stub_order_id',
-        'currency' => 'EUR',
-        'cart' => array(),
-        'salutation' => 'MR',
-        'first_name' => 'stub_name',
-        'last_name' => 'stub_lastname',
-        'street' => 'stub_street',
-        'street_number' => '123',
-        'zip' => '10111',
-        'city' => 'Berlin',
-        'country' => 'DE',
-        'social_security_number' => 'stub_SSN',
-        'birthdate' => self::DEFAULT_STUB_DATE,
-        'phone' => '451231212',
-        'email' => 'stub@domain.com',
-        'success_url' => 'https://domain.com/success',
-        'failure_url' => 'https://domain.com/fail',
-        'cancel_url' => 'https://domain.com/cancel',
-        'notice_url' => 'https://domain.com/notice',
-        'pending_url' => 'https://domain.com/pending',
-        'x_frame_host' => 'domain.com',
-        'plugin_version' => '1.0.0',
-    );
-
-    public static function getScheme()
+    public function testMethods()
     {
-        $scheme = static::$scheme;
+        $request = new CreatePaymentRequest();
 
-        $scheme['cart'] = array(CartItemEntityTest::getScheme());
+        $this->assertInstanceOf(
+            CreatePaymentRequest::class,
+            $request->setChannel(new ChannelEntity())
+        );
+        $this->assertInstanceOf(
+            ChannelEntity::class,
+            $request->getChannel()
+        );
 
-        return $scheme;
-    }
+        $this->assertInstanceOf(
+            CreatePaymentRequest::class,
+            $request->setPurchase(new PurchaseEntity())
+        );
+        $this->assertInstanceOf(PurchaseEntity::class, $request->getPurchase());
 
+        $this->assertInstanceOf(
+            CreatePaymentRequest::class,
+            $request->setCustomer(new CustomerEntity())
+        );
+        $this->assertInstanceOf(
+            CustomerEntity::class,
+            $request->getCustomer()
+        );
 
-    public function getEntity()
-    {
-        return new CreatePaymentRequest();
-    }
+        $this->assertInstanceOf(
+            CreatePaymentRequest::class,
+            $request->setCompany(new CompanyEntity())
+        );
+        $this->assertInstanceOf(
+            CompanyEntity::class,
+            $request->getCompany()
+        );
+        $this->assertInstanceOf(
+            CreatePaymentRequest::class,
+            $request->setShippingOption(new ShippingOptionEntity())
+        );
+        $this->assertInstanceOf(
+            ShippingOptionEntity::class,
+            $request->getShippingOption()
+        );
 
-    protected function assertRequestEntityInvalid(MessageEntity $entity)
-    {
-        /** @var CreatePaymentRequest $innerEntity */
-        $innerEntity = clone $entity;
-        $innerEntity->setAmount('');
-        $this->assertFalse($innerEntity->isValid());
+        $this->assertInstanceOf(
+            CreatePaymentRequest::class,
+            $request->setShippingAddress(new CustomerAddressEntity())
+        );
+        $this->assertInstanceOf(
+            CustomerAddressEntity::class,
+            $request->getShippingAddress()
+        );
 
-        $innerEntity = clone $entity;
-        $innerEntity->setFee('non-numeric');
-        $this->assertFalse($innerEntity->isValid());
+        $this->assertInstanceOf(
+            CreatePaymentRequest::class,
+            $request->setBillingAddress(new CustomerAddressEntity())
+        );
+        $this->assertInstanceOf(
+            CustomerAddressEntity::class,
+            $request->getBillingAddress()
+        );
 
-        $innerEntity = clone $entity;
-        $innerEntity->setChannelSetId('non-numeric');
-        $this->assertFalse($innerEntity->isValid());
+        $this->assertInstanceOf(
+            CreatePaymentRequest::class,
+            $request->setAttributes(new AttributesEntity())
+        );
+        $this->assertInstanceOf(
+            AttributesEntity::class,
+            $request->getAttributes()
+        );
 
-        parent::assertRequestEntityInvalid($entity);
+        $this->assertInstanceOf(
+            CreatePaymentRequest::class,
+            $request->setUrls(new UrlsEntity())
+        );
+        $this->assertInstanceOf(
+            UrlsEntity::class,
+            $request->getUrls()
+        );
+
+        $this->assertInstanceOf(
+            CreatePaymentRequest::class,
+            $request->setSeller(new SellerEntity())
+        );
+        $this->assertInstanceOf(
+            SellerEntity::class,
+            $request->getSeller()
+        );
+
+        $this->assertInstanceOf(
+            CreatePaymentRequest::class,
+            $request->setOptions(new OptionsEntity())
+        );
+        $this->assertInstanceOf(
+            OptionsEntity::class,
+            $request->getOptions()
+        );
+
+        $this->assertInstanceOf(
+            CreatePaymentRequest::class,
+            $request->setPaymentData(new PaymentDataEntity())
+        );
+        $this->assertInstanceOf(
+            PaymentDataEntity::class,
+            $request->getPaymentData()
+        );
+
+        $this->assertInstanceOf(
+            CreatePaymentRequest::class,
+            $request->setExpiresAt('now')
+        );
+        $this->assertInstanceOf(
+            \DateTime::class,
+            $request->getExpiresAt()
+        );
+
+        $this->assertInstanceOf(
+            CreatePaymentRequest::class,
+            $request->setVerify(new VerifyEntity())
+        );
+        $this->assertInstanceOf(
+            VerifyEntity::class,
+            $request->getVerify()
+        );
+
+        $this->assertInstanceOf(
+            CreatePaymentRequest::class,
+            $request->setSplits([new SplitItemEntity()])
+        );
+        $this->assertIsArray($request->getSplits());
+
+        $this->assertInstanceOf(
+            CreatePaymentRequest::class,
+            $request->setCart([new CartItemEntity()])
+        );
+        $this->assertIsArray($request->getCart());
     }
 }

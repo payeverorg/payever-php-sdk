@@ -90,13 +90,13 @@ This API client is used in all payment-related interactions.
 ```php
 use Payever\Sdk\Payments\Enum\PaymentMethod;
 use Payever\Sdk\Payments\Enum\Salutation;
-use Payever\Sdk\Payments\Http\MessageEntity\Payment\CartItemV3Entity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\CartItemEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\ChannelEntity;
-use Payever\Sdk\Payments\Http\MessageEntity\Payment\CustomerAddressV3Entity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\CustomerAddressEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\CustomerEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\PurchaseEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\UrlsEntity;
-use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentV3Request;
+use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentRequest;
 
 $channelEntity = new ChannelEntity();
 $channelEntity->setName('api');
@@ -114,7 +114,7 @@ $customerEntity
     ->setPhone('+450001122')
     ->setBirthdate('1990-01-01');
 
-$cartItem = new CartItemV3Entity();
+$cartItem = new CartItemEntity();
 $cartItem
     ->setName('Product 1')
     ->setIdentifier('product-1')
@@ -129,7 +129,7 @@ $cartItem
     ->setProductUrl('product-1')
     ->setCategory('category');
 
-$addressEntity = new CustomerAddressV3Entity();
+$addressEntity = new CustomerAddressEntity();
 $addressEntity
     ->setSalutation(Salutation::SALUTATION_MR)
     ->setFirstName('John')
@@ -149,7 +149,7 @@ $urls
     ->setCancel('http:://your.domain/cancel')
     ->setNotification('http:://your.domain/notification?paymentId=--PAYMENT-ID--');
 
-$requestEntity = new CreatePaymentV3Request();
+$requestEntity = new CreatePaymentRequest();
 $requestEntity
     ->setChannel($channelEntity)
     ->setReference('1001')

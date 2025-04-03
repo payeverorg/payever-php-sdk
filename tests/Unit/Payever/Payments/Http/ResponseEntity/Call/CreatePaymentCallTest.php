@@ -35,7 +35,6 @@ class CreatePaymentCallTest extends AbstractMessageEntityTestCase
         'notice_url' => 'https://domain.com/notice',
         'pending_url' => 'https://domain.com/pending',
         'x_frame_host' => 'domain.com',
-        'payments' => array(),
         'type' => 'stub_type',
     );
 

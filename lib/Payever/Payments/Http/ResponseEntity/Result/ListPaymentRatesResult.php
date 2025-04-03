@@ -28,6 +28,14 @@ use Payever\Sdk\Payments\Http\MessageEntity\PaymentRatesSpecificDataEntity;
  * @method float                           getInterestRate()
  * @method float                           getAnnualPercentageRate()
  * @method PaymentRatesSpecificDataEntity  getSpecificData()
+ * @method string                          getCampaignCode()
+ * @method float                           getCreditPurchase()
+ * @method string                          getDescription()
+ * @method float                           getEffectiveRate()
+ * @method bool                            getIsFixedAmount()
+ * @method bool                            getIsInterestFree()
+ * @method float                           getMonthlyAmount()
+ * @method string                          getTitle()
  * @method $this                           setAmount(float $amount)
  * @method $this                           setDuration(int $duration)
  * @method $this                           setMonthlyPayment(float $monthlyPayment)
@@ -36,6 +44,14 @@ use Payever\Sdk\Payments\Http\MessageEntity\PaymentRatesSpecificDataEntity;
  * @method $this                           setInterest(float $interest)
  * @method $this                           setInterestRate(float $interestRate)
  * @method $this                           setAnnualPercentageRate(float $annualPercentageRate)
+ * @method $this                           setCampaignCode(string $campaignCode)
+ * @method $this                           setCreditPurchase(float $creditPurchase)
+ * @method $this                           setDescription(string $description)
+ * @method $this                           setEffectiveRate(float $effectiveRate)
+ * @method $this                           setIsFixedAmount(bool $isFixedAmount)
+ * @method $this                           setIsInterestFree(bool $isInterestFree)
+ * @method $this                           setMonthlyAmount(float $monthlyAmount)
+ * @method $this                           setTitle(string $title)
  */
 class ListPaymentRatesResult extends ResultEntity
 {
@@ -65,6 +81,30 @@ class ListPaymentRatesResult extends ResultEntity
 
     /** @var PaymentRatesSpecificDataEntity $specificData */
     protected $specificData;
+
+    /** @var string $campaignCode */
+    protected $campaignCode;
+
+    /** @var float $creditPurchase */
+    protected $creditPurchase;
+
+    /** @var string $description */
+    protected $description;
+
+    /** @var float $effectiveRate */
+    protected $effectiveRate;
+
+    /** @var bool $isFixedAmount */
+    protected $isFixedAmount;
+
+    /** @var bool $isFixedAmount */
+    protected $isInterestFree;
+
+    /** @var float $effectiveRate */
+    protected $monthlyAmount;
+
+    /** @var string $description */
+    protected $title;
 
     /**
      * @param PaymentRatesSpecificDataEntity|array $specificData

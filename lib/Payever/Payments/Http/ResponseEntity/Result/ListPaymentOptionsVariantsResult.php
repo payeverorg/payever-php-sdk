@@ -18,7 +18,7 @@ use Payever\Sdk\Payments\Http\MessageEntity\PaymentOptionVariantEntity;
 /**
  * @method PaymentOptionVariantEntity[] getVariants()
  */
-class ListPaymentOptionsVariantsResult extends AbstractPaymentOptionResult
+class ListPaymentOptionsVariantsResult extends ListPaymentOptionsResult
 {
     /** @var array|PaymentOptionVariantEntity[] */
     protected $variants = [];

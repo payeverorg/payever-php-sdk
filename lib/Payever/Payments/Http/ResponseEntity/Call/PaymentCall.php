@@ -19,50 +19,14 @@ use Payever\Sdk\Core\Http\MessageEntity\CallEntity;
  * This class represents Payment Call Entity
  *
  * @method string          getPaymentId()
- * @method string          getCustomerId()
- * @method string          getInvoiceId()
- * @method \DateTime|false getInvoiceDate()
- * @method string          getType()
- * @method string          getMessage()
+ * @method string          getRequires2fa()
  * @method $this           setPaymentId(string $paymentId)
- * @method $this           setCustomerId(string $customerId)
- * @method $this           setInvoiceId(string $invoiceId)
- * @method $this           setType(string $type)
- * @method $this           setMessage(string $message)
+ * @method $this           setRequires2fa(bool $requires2fa)
  */
 class PaymentCall extends CallEntity
 {
     /** @var string $paymentId */
     protected $paymentId;
 
-    /** @var string $customerId */
-    protected $customerId;
-
-    /** @var string $invoiceId */
-    protected $invoiceId;
-
-    /** @var \DateTime|bool $invoiceDate */
-    protected $invoiceDate;
-
-    /** @var string $type */
-    protected $type;
-
-    /** @var string $message */
-    protected $message;
-
-    /**
-     * Sets Invoice Date
-     *
-     * @param string $invoiceDate
-     *
-     * @return $this
-     */
-    public function setInvoiceDate($invoiceDate)
-    {
-        if ($invoiceDate) {
-            $this->invoiceDate = date_create($invoiceDate);
-        }
-
-        return $this;
-    }
+    protected $requires2fa;
 }

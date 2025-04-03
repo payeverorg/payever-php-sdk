@@ -14,18 +14,14 @@
 namespace Payever\Sdk\Payments\Http\ResponseEntity\Call;
 
 use Payever\Sdk\Core\Http\MessageEntity\CallEntity;
-use Payever\Sdk\Core\Http\MessageEntity\ChannelSetEntity;
 
 /**
  * This class represents List Payment Options Call Entity
  *
- * @method string           getAction()
- * @method string           getChannel()
- * @method ChannelSetEntity getChannelSet()
- * @method string           getType()
- * @method $this            setAction(string $action)
- * @method $this            setChannel(string $channel)
- * @method $this            setType(string $type)
+ * @method string     getAction()
+ * @method string     getChannel()
+ * @method $this      setAction(string $action)
+ * @method $this      setChannel(string $channel)
  */
 class ListPaymentOptionsCall extends CallEntity
 {
@@ -34,20 +30,4 @@ class ListPaymentOptionsCall extends CallEntity
 
     /** @var string $channel */
     protected $channel;
-
-    /** @var ChannelSetEntity $channelSet */
-    protected $channelSet;
-
-    /** @var string $type */
-    protected $type;
-
-    /**
-     * Sets Channel Set
-     *
-     * @param array $channelSet
-     */
-    public function setChannelSet($channelSet)
-    {
-        $this->channelSet = new ChannelSetEntity($channelSet);
-    }
 }

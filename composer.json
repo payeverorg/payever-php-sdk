@@ -40,5 +40,5 @@
       "ext-pdo" : "If you want to use MySQLLock"
    },
    "type" : "library",
-   "version" : "0.0.6"
+   "version" : "0.0.7"
 }

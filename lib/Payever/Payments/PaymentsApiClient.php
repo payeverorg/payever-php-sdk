@@ -22,15 +22,12 @@ use Payever\Sdk\Payments\Http\RequestEntity\AuthorizePaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\CancelItemsPaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\CancelPaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentRequest;
-use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentV2Request;
-use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentV3Request;
 use Payever\Sdk\Payments\Http\RequestEntity\EditPaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\ListPaymentsRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\RefundItemsPaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\RefundPaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\ShippingGoodsPaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\SubmitPaymentRequest;
-use Payever\Sdk\Payments\Http\RequestEntity\SubmitPaymentV3Request;
 use Payever\Sdk\Payments\Http\RequestEntity\TermsPaymentRequest;
 use Payever\Sdk\Payments\Http\ResponseEntity\CreatePaymentResponse;
 use Payever\Sdk\Payments\Http\ResponseEntity\GetTransactionResponse;
@@ -57,11 +54,8 @@ use Payever\Sdk\Payments\Http\ResponseEntity\TermsPaymentResponse;
  */
 class PaymentsApiClient extends CommonApiClient implements PaymentsApiClientInterface
 {
-    const SUB_URL_CREATE_PAYMENT = 'api/payment';
-    const SUB_URL_CREATE_PAYMENT_V2 = 'api/v2/payment';
-    const SUB_URL_CREATE_PAYMENT_V3 = 'api/v3/payment';
-    const SUB_URL_CREATE_PAYMENT_SUBMIT = 'api/payment/submit';
-    const SUB_URL_CREATE_PAYMENT_SUBMIT_V3 = 'api/v3/payment/submit';
+    const SUB_URL_CREATE_PAYMENT = 'api/v3/payment';
+    const SUB_URL_CREATE_PAYMENT_SUBMIT = 'api/v3/payment/submit';
     const SUB_URL_RISK_PAYMENT = 'api/v2/payment/risk/%s';
     const SUB_URL_TERMS_PAYMENT = 'api/payment/terms/%s';
     const SUB_URL_RETRIEVE_PAYMENT = 'api/payment/%s';
@@ -90,54 +84,7 @@ class PaymentsApiClient extends CommonApiClient implements PaymentsApiClientInte
     {
         $this->configuration->assertLoaded();
 
-        if (!$createPaymentRequest->getChannel()) {
-            $createPaymentRequest->setChannel(
-                $this->configuration->getChannelSet()
-            );
-        }
-
         $request = RequestBuilder::post($this->getCreatePaymentURL())
-            ->addRawHeader(
-                $this->getToken(OauthTokenInterface::SCOPE_CREATE_PAYMENT)->getAuthorizationString()
-            )
-            ->setRequestEntity($createPaymentRequest)
-            ->setResponseEntity(new CreatePaymentResponse())
-            ->build();
-
-        return $this->executeRequest($request, OauthTokenInterface::SCOPE_CREATE_PAYMENT);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Exception
-     */
-    public function createPaymentV2Request(CreatePaymentV2Request $createPaymentRequest)
-    {
-        $this->configuration->assertLoaded();
-
-        $request = RequestBuilder::post($this->getCreatePaymentV2URL())
-            ->addRawHeader(
-                $this->getToken(OauthTokenInterface::SCOPE_CREATE_PAYMENT)->getAuthorizationString()
-            )
-            ->contentTypeIsJson()
-            ->setRequestEntity($createPaymentRequest)
-            ->setResponseEntity(new CreatePaymentResponse())
-            ->build();
-
-        return $this->executeRequest($request, OauthTokenInterface::SCOPE_CREATE_PAYMENT);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Exception
-     */
-    public function createPaymentV3Request(CreatePaymentV3Request $createPaymentRequest)
-    {
-        $this->configuration->assertLoaded();
-
-        $request = RequestBuilder::post($this->getCreatePaymentV3URL())
             ->addRawHeader(
                 $this->getToken(OauthTokenInterface::SCOPE_CREATE_PAYMENT)->getAuthorizationString()
             )
@@ -165,33 +112,6 @@ class PaymentsApiClient extends CommonApiClient implements PaymentsApiClientInte
         }
 
         $request = RequestBuilder::post($this->getSubmitPaymentURL())
-            ->addRawHeader(
-                $this->getToken(OauthTokenInterface::SCOPE_CREATE_PAYMENT)->getAuthorizationString()
-            )
-            ->contentTypeIsJson()
-            ->setRequestEntity($submitPaymentRequest)
-            ->setResponseEntity(new RetrievePaymentResponse())
-            ->build();
-
-        return $this->executeRequest($request, OauthTokenInterface::SCOPE_CREATE_PAYMENT);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Exception
-     */
-    public function submitPaymentV3Request(SubmitPaymentV3Request $submitPaymentRequest)
-    {
-        $this->configuration->assertLoaded();
-
-        if (!$submitPaymentRequest->getChannel()) {
-            $submitPaymentRequest->setChannel(
-                $this->configuration->getChannelSet()
-            );
-        }
-
-        $request = RequestBuilder::post($this->getSubmitPaymentV3URL())
             ->addRawHeader(
                 $this->getToken(OauthTokenInterface::SCOPE_CREATE_PAYMENT)->getAuthorizationString()
             )
@@ -652,26 +572,6 @@ class PaymentsApiClient extends CommonApiClient implements PaymentsApiClientInte
     }
 
     /**
-     * Returns URL for Create Payment path
-     *
-     * @return string
-     */
-    protected function getCreatePaymentV2URL()
-    {
-        return $this->getBaseUrl() . self::SUB_URL_CREATE_PAYMENT_V2;
-    }
-
-    /**
-     * Returns URL for Create Payment path
-     *
-     * @return string
-     */
-    protected function getCreatePaymentV3URL()
-    {
-        return $this->getBaseUrl() . self::SUB_URL_CREATE_PAYMENT_V3;
-    }
-
-    /**
      * Returns URL for Submit Payment path
      *
      * @return string
@@ -679,16 +579,6 @@ class PaymentsApiClient extends CommonApiClient implements PaymentsApiClientInte
     protected function getSubmitPaymentURL()
     {
         return $this->getBaseUrl() . self::SUB_URL_CREATE_PAYMENT_SUBMIT;
-    }
-
-    /**
-     * Returns URL for Submit Payment path V3
-     *
-     * @return string
-     */
-    protected function getSubmitPaymentV3URL()
-    {
-        return $this->getBaseUrl() . self::SUB_URL_CREATE_PAYMENT_SUBMIT_V3;
     }
 
     /**

@@ -14,15 +14,29 @@ class CartItemEntityTest extends AbstractMessageEntityTestCase
 {
     protected static $scheme = array(
         'name' => 'stub_name',
-        'price' => 100.55,
-        'quantity' => 2,
+        'unit_price' => 100,
+        'tax_rate' => 19,
+        'quantity' => 1,
+        'total_amount' => 119,
+        'total_tax_amount' => 19,
         'description' => 'stub_description',
-        'thumbnail' => 'stub',
+        'category' => 'Goods',
+        'image_url' => 'stub',
+        'product_url' => 'stub',
         'sku' => 'stub_sku',
-        'priceNetto' => 90,
-        'priceNet' => 90,
-        'vatRate' => 10.55,
+        'identifier' => 'stub_sku',
+        'brand' => 'brand',
+        'attributes' => array(),
     );
+
+    public static function getScheme()
+    {
+        $scheme = static::$scheme;
+
+        $scheme['attributes'] = AttributesEntityTest::getScheme();
+
+        return $scheme;
+    }
 
     public function getEntity()
     {

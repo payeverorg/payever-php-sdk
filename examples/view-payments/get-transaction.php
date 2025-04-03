@@ -14,7 +14,7 @@ try {
 
     $paymentsApiClient = new PaymentsApiClient($clientConfiguration);
 
-    $paymentId = '4a485ff8-6839-4700-a4a0-d199f199c4c0';
+    $paymentId = '--PAYMENT-ID--';
 
     /* Retrieve the payment details. */
     $paymentDetailsResponse = $paymentsApiClient->getTransactionRequest($paymentId);

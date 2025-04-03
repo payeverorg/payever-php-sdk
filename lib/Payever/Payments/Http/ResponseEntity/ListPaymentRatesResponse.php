@@ -14,25 +14,15 @@
 namespace Payever\Sdk\Payments\Http\ResponseEntity;
 
 use Payever\Sdk\Core\Http\MessageEntity\ResponseEntity;
-use Payever\Sdk\Payments\Http\ResponseEntity\Call\ListPaymentRatesCall;
 use Payever\Sdk\Payments\Http\ResponseEntity\Result\ListPaymentRatesResult;
 
 /**
  * This class represents List Payment Rates ResponseInterface Entity
  *
- * @method ListPaymentRatesCall           getCall()
  * @method array|ListPaymentRatesResult[] getResult()
  */
 class ListPaymentRatesResponse extends ResponseEntity
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function setCall($call)
-    {
-        $this->call = new ListPaymentRatesCall($call);
-    }
-
     /**
      * {@inheritdoc}
      */

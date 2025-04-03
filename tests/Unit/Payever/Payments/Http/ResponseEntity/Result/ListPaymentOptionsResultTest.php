@@ -26,8 +26,6 @@ class ListPaymentOptionsResultTest extends AbstractMessageEntityTestCase
         'min' => 100,
         'max' => 10000,
         'payment_method' => 'stripe',
-        'type' => 'stripe',
-        'slug' => 'stripe_slug',
         'thumbnail_1' => 'some_image',
         'thumbnail_2' => null,
         'thumbnail_3' => null,

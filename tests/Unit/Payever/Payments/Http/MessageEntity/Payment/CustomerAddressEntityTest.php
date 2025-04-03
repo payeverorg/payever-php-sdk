@@ -2,15 +2,15 @@
 
 namespace Payever\Tests\Unit\Payever\Payments\Http\MessageEntity\Payment;
 
-use Payever\Sdk\Payments\Http\MessageEntity\Payment\CustomerAddressV3Entity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\CustomerAddressEntity;
 use Payever\Tests\Unit\Payever\Core\Http\AbstractMessageEntityTestCase;
 
 /**
  * Class CustomerAddressV3EntityTest
  *
- * @see \Payever\Sdk\Payments\Http\MessageEntity\Payment\CustomerAddressV3Entity
+ * @see \Payever\Sdk\Payments\Http\MessageEntity\Payment\CustomerAddressEntity
  */
-class CustomerAddressV3EntityTest extends AbstractMessageEntityTestCase
+class CustomerAddressEntityTest extends AbstractMessageEntityTestCase
 {
     protected static $scheme = array(
         'salutation' => 'mr',
@@ -29,6 +29,6 @@ class CustomerAddressV3EntityTest extends AbstractMessageEntityTestCase
 
     public function getEntity()
     {
-        return new CustomerAddressV3Entity();
+        return new CustomerAddressEntity();
     }
 }

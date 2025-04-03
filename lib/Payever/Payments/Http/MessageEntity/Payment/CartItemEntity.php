@@ -16,57 +16,69 @@ namespace Payever\Sdk\Payments\Http\MessageEntity\Payment;
 use Payever\Sdk\Core\Base\MessageEntity;
 
 /**
- * This class represents Cart Item Entity
+ * This class represents Cart Item V3 Entity
  *
  * @method string                  getName()
- * @method float                   getPrice()
- * @method float                   getPriceNetto()
- * @method float                   getPriceNet()
- * @method float                   getVatRate()
+ * @method float                   getUnitPrice()
+ * @method float                   getTaxRate()
  * @method float                   getQuantity()
+ * @method float                   getTotalAmount()
+ * @method float                   getTotalTaxAmount()
  * @method string                  getDescription()
- * @method string                  getThumbnail()
+ * @method string                  getCategory()
+ * @method string                  getImageUrl()
+ * @method string                  getProductUrl()
  * @method string                  getSku()
  * @method string                  getIdentifier()
+ * @method AttributesEntity        getAttributes()
+ * @method string                  getBrand()
  * @method CartItemExtraDataEntity getExtraData()
  * @method $this                   setName(string $name)
- * @method $this                   setPrice(float $price)
- * @method $this                   setPriceNetto(float $priceNetto)
- * @method $this                   setPriceNet(float $priceNet)
- * @method $this                   setVatRate(float $vatRate)
+ * @method $this                   setUnitPrice(float $price)
+ * @method $this                   setTaxRate(float $taxRate)
  * @method $this                   setQuantity(float $quantity)
+ * @method $this                   setTotalAmount(float $total)
+ * @method $this                   setTotalTaxAmount(float $total)
  * @method $this                   setDescription(string $description)
+ * @method $this                   setCategory(string $category)
+ * @method $this                   setImageUrl(string $url)
  * @method $this                   setThumbnail(string $thumbnail)
+ * @method $this                   setProductUrl(string $url)
  * @method $this                   setSku(string $sku)
  * @method $this                   setIdentifier(string $identifier)
+ * @method $this                   setBrand(string $value)
  */
 class CartItemEntity extends MessageEntity
 {
-    const UNDERSCORE_ON_SERIALIZATION = false;
-
     /** @var string $name */
     protected $name;
 
-    /** @var float $name */
-    protected $price;
+    /** @var float $unitPrice */
+    protected $unitPrice;
 
-    /** @var float $priceNetto */
-    protected $priceNetto;
-
-    /** @var float $priceNet */
-    protected $priceNet;
-
-    /** @var float $vatRate */
-    protected $vatRate;
+    /** @var float $taxRate */
+    protected $taxRate;
 
     /** @var float $quantity */
     protected $quantity;
 
+    /** @var float $totalAmount */
+    protected $totalAmount;
+
+    /** @var float $totalTaxAmount */
+    protected $totalTaxAmount;
+
     /** @var string $description */
     protected $description;
 
-    /** @var string $thumbnail */
-    protected $thumbnail;
+    /** @var string $category */
+    protected $category;
+
+    /** @var string $imageUrl */
+    protected $imageUrl;
+
+    /** @var string $productUrl */
+    protected $productUrl;
 
     /** @var string $sku */
     protected $sku;
@@ -74,8 +86,40 @@ class CartItemEntity extends MessageEntity
     /** @var string $identifier */
     protected $identifier;
 
+    /** @var AttributesEntity $attributes */
+    protected $attributes;
+
+    /** @var string $brand */
+    protected $brand;
+
     /** @var CartItemExtraDataEntity $extraData */
     protected $extraData;
+
+    /**
+     * Sets Attributes
+     *
+     * @param AttributesEntity|string $attributes
+     *
+     * @return $this
+     */
+    public function setAttributes($attributes)
+    {
+        if (!$attributes) {
+            return $this;
+        }
+
+        if (is_string($attributes)) {
+            $attributes = json_decode($attributes);
+        }
+
+        if (!is_array($attributes) && !is_object($attributes)) {
+            return $this;
+        }
+
+        $this->attributes = new AttributesEntity($attributes);
+
+        return $this;
+    }
 
     /**
      * @param CartItemExtraDataEntity|string $extraData

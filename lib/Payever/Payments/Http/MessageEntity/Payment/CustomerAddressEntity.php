@@ -21,23 +21,25 @@ use Payever\Sdk\Core\Base\MessageEntity;
  * @method string getSalutation()
  * @method float  getFirstName()
  * @method float  getLastName()
+ * @method string getOrganizationName()
  * @method float  getStreet()
  * @method float  getStreetNumber()
  * @method string getZip()
  * @method string getCountry()
  * @method string getCity()
  * @method string getRegion()
- * @method string getAddressLine2()
+ * @method string getStreetLine2()
  * @method $this  setSalutation(string $salutation)
  * @method $this  setFirstName(string $firstName)
  * @method $this  setLastName(string $lastName)
+ * @method $this  setOrganizationName(string $value)
  * @method $this  setStreet(string $street)
  * @method $this  setStreetNumber(string $streetNumber)
  * @method $this  setZip(string $zip)
  * @method $this  setCountry(string $country)
  * @method $this  setCity(string $city)
  * @method $this  setRegion(string $region)
- * @method $this  setAddressLine2(string $addressLine2)
+ * @method $this  setStreetLine2(string $addressLine2)
  */
 class CustomerAddressEntity extends MessageEntity
 {
@@ -49,6 +51,9 @@ class CustomerAddressEntity extends MessageEntity
 
     /** @var string $lastName */
     protected $lastName;
+
+    /** @var string $organizationName */
+    protected $organizationName;
 
     /** @var string $street */
     protected $street;
@@ -65,9 +70,28 @@ class CustomerAddressEntity extends MessageEntity
     /** @var string $city */
     protected $city;
 
-    /** @var string $region */
-    protected $region;
+    /** @var string $streetLine2 */
+    protected $streetLine2;
 
-    /** @var string $addressLine2 */
-    protected $addressLine2;
+    /** @var string $streetName */
+    protected $streetName;
+
+    /** @var string $houseExtension */
+    protected $houseExtension;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRequired()
+    {
+        return [
+            'first_name',
+            'last_name',
+            'street_name',
+            'street_number',
+            'city',
+            'zip',
+            'country'
+        ];
+    }
 }

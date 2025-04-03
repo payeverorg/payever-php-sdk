@@ -14,11 +14,8 @@ class PaymentCallTest extends AbstractMessageEntityTestCase
 {
     protected static $scheme = array(
         'payment_id' => 'stub_id',
-        'customer_id' => 'stub_customer_id',
-        'invoice_id' => 'stub_invoice_id',
-        'invoice_date' => self::DEFAULT_STUB_DATE,
         'type' => 'create',
-        'message' => 'OK',
+        'requires_2fa' => false,
     );
 
     public function getEntity()

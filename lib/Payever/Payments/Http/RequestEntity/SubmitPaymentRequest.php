@@ -14,70 +14,57 @@
 namespace Payever\Sdk\Payments\Http\RequestEntity;
 
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\CartItemEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\ChannelEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\CompanyEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\CustomerAddressEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\CustomerEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\OptionsEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\PaymentDataEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\PurchaseEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\SellerEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\ShippingOptionEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\SplitItemEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\UrlsEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\VerifyEntity;
 
 /**
  * This class represents Create Payment RequestInterface Entity
  *
- * @method string                 getChannel()
- * @method integer                getChannelSetId()
- * @method float                  getAmount()
- * @method float                  getFee()
- * @method string                 getOrderId()
- * @method string                 getCurrency()
- * @method CartItemEntity[]       getCart()
- * @method PaymentDataEntity|null getPaymentData()
- * @method string                 getSalutation()
- * @method string                 getPaymentMethod()
- * @method string|null            getVariantId()
- * @method string                 getFirstName()
- * @method string                 getLastName()
- * @method string                 getStreet()
- * @method string                 getStreetNumber()
- * @method string                 getZip()
- * @method string                 getCity()
- * @method string                 getRegion()
- * @method string                 getCountry()
- * @method string                 getSocialSecurityNumber()
- * @method \DateTime|false        getBirthdate()
- * @method string                 getPhone()
- * @method string                 getEmail()
- * @method string                 getSuccessUrl()
- * @method string                 getFailureUrl()
- * @method string                 getCancelUrl()
- * @method string                 getNoticeUrl()
- * @method string                 getPendingUrl()
- * @method string                 getCustomerRedirectUrl()
- * @method string                 getXFrameHost()
- * @method string                 getPluginVersion()
- * @method $this                  setChannel(string $channel)
- * @method $this                  setChannelSetId(int $id)
- * @method $this                  setAmount(float $amount)
- * @method $this                  setFee(float $fee)
- * @method $this                  setOrderId(string $id)
- * @method $this                  setPaymentMethod(string $method)
- * @method $this                  setVariantId(string|null $variantId)
- * @method $this                  setCurrency(string $currency)
- * @method $this                  setSalutation(string $salutation)
- * @method $this                  setFirstName(string $name)
- * @method $this                  setLastName(string $name)
- * @method $this                  setStreet(string $street)
- * @method $this                  setStreetNumber(string $streetNumber)
- * @method $this                  setZip(string $zip)
- * @method $this                  setCity(string $city)
- * @method $this                  setRegion(string $region)
- * @method $this                  setCountry(string $country)
- * @method $this                  setSocialSecurityNumber(string $ssn)
- * @method $this                  setPhone(string $phone)
- * @method $this                  setEmail(string $email)
- * @method $this                  setSuccessUrl(string $url)
- * @method $this                  setFailureUrl(string $url)
- * @method $this                  setCancelUrl(string $url)
- * @method $this                  setNoticeUrl(string $url)
- * @method $this                  setPendingUrl(string $url)
- * @method $this                  setCustomerRedirectUrl(string $url)
- * @method $this                  setXFrameHost(string $host)
- * @method $this                  setPluginVersion(string $version)
+ * @method ChannelEntity             getChannel()
+ * @method PurchaseEntity            getPurchase()
+ * @method CustomerEntity            getCustomer()
+ * @method CompanyEntity             getCompany()
+ * @method CustomerAddressEntity     getBillingAddress()
+ * @method CustomerAddressEntity     getShippingAddress()
+ * @method ShippingOptionEntity      getShippingOption()
+ * @method CartItemEntity[]          getCart()
+ * @method SplitItemEntity[]         getSplits()
+ * @method UrlsEntity                getUrls()
+ * @method OptionsEntity             getOptions()
+ * @method VerifyEntity              getVerify()
+ * @method SellerEntity              getSeller()
+ * @method string                    getReference()
+ * @method string                    getReferenceExtra()
+ * @method string|null               getPaymentVariantId()
+ * @method string|null               getPaymentMethod()
+ * @method array                     getPaymentMethods()
+ * @method string                    getLocale()
+ * @method string                    getXFrameHost()
+ * @method string                    getPluginVersion()
+ * @method string                    getClientIp()
+ * @method \DateTime|null            getExpiresAt()
+ * @method PaymentDataEntity|null    getPaymentData()
+ * @method $this                     setReference(string $id)
+ * @method $this                     setReferenceExtra(string $id)
+ * @method $this                     setPaymentVariantId(string|null $variantId)
+ * @method $this                     setPaymentMethod(string $paymentMethod)
+ * @method $this                     setPaymentMethods(array $paymentMethods)
+ * @method $this                     setLocale(string $locale)
+ * @method $this                     setXFrameHost(string $host)
+ * @method $this                     setPluginVersion(string $version)
+ * @method $this                     setClientIp(string $ip)
+ *
+ * @SuppressWarnings(PHPMD.TooManyFields)
  */
 class SubmitPaymentRequest extends CreatePaymentRequest
 {

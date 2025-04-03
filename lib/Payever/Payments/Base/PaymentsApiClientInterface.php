@@ -18,12 +18,9 @@ use Payever\Sdk\Core\Base\ResponseInterface;
 use Payever\Sdk\Payments\Http\RequestEntity\Action\PaymentItemEntity;
 use Payever\Sdk\Payments\Http\RequestEntity\AuthorizePaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentRequest;
-use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentV2Request;
-use Payever\Sdk\Payments\Http\RequestEntity\CreatePaymentV3Request;
 use Payever\Sdk\Payments\Http\RequestEntity\ListPaymentsRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\ShippingGoodsPaymentRequest;
 use Payever\Sdk\Payments\Http\RequestEntity\SubmitPaymentRequest;
-use Payever\Sdk\Payments\Http\RequestEntity\SubmitPaymentV3Request;
 use Payever\Sdk\Payments\Http\RequestEntity\TermsPaymentRequest;
 
 /**
@@ -34,61 +31,24 @@ interface PaymentsApiClientInterface extends CommonApiClientInterface
     /**
      * Sends a request to create payment
      *
-     * @link https://docs.payever.org/api/payments/create-payment/create-payments Documentation
+     * @link https://docs.payever.org/api/payments/v3/create-payment/create-payments Documentation
      *
      * @param CreatePaymentRequest $createPaymentRequest
      *
      * @return ResponseInterface
-     *
-     * @deprecated
      */
     public function createPaymentRequest(CreatePaymentRequest $createPaymentRequest);
-
-    /**
-     * Sends a request to create payment for v2 version of api
-     *
-     * @link https://docs.payever.org/api/payments/v2/create-payment/create-payments Documentation
-     *
-     * @param CreatePaymentV2Request $createPaymentRequest
-     *
-     * @return ResponseInterface
-     */
-    public function createPaymentV2Request(CreatePaymentV2Request $createPaymentRequest);
-
-    /**
-     * Sends a request to create payment for v2 version of api
-     *
-     * @link https://docs.payever.org/api/payments/v3/create-payment/create-payments Documentation
-     *
-     * @param CreatePaymentV3Request $createPaymentRequest
-     *
-     * @return ResponseInterface
-     */
-    public function createPaymentV3Request(CreatePaymentV3Request $createPaymentRequest);
-
-    /**
-     * Sends a request to submit payment
-     *
-     * @link https://docs.payever.org/api/payments/create-payment/submit-payments Documentation
-     *
-     * @param SubmitPaymentRequest $submitPaymentRequest
-     *
-     * @return ResponseInterface
-     *
-     * @deprecated
-     */
-    public function submitPaymentRequest(SubmitPaymentRequest $submitPaymentRequest);
 
     /**
      * Sends a request to submit payment
      *
      * @link https://docs.payever.org/api/payments/v3/create-payment/submit-payments Documentation
      *
-     * @param SubmitPaymentV3Request $submitPaymentRequest
+     * @param SubmitPaymentRequest $submitPaymentRequest
      *
      * @return ResponseInterface
      */
-    public function submitPaymentV3Request(SubmitPaymentV3Request $submitPaymentRequest);
+    public function submitPaymentRequest(SubmitPaymentRequest $submitPaymentRequest);
 
     /**
      * Requests payment risks
