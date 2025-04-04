@@ -52,6 +52,8 @@ use Payever\Sdk\Payments\Http\MessageEntity\PaymentRatesSpecificDataEntity;
  * @method $this                           setIsInterestFree(bool $isInterestFree)
  * @method $this                           setMonthlyAmount(float $monthlyAmount)
  * @method $this                           setTitle(string $title)
+ *
+ * @SuppressWarnings(PHPMD.TooManyFields)
  */
 class ListPaymentRatesResult extends ResultEntity
 {

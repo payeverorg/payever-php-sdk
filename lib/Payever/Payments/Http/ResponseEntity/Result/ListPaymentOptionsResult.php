@@ -81,6 +81,7 @@ use Payever\Sdk\Payments\Http\MessageEntity\PaymentOptionTranslationEntity;
  * @method $this                            setMin(float $min)
  *
  * @SuppressWarnings(PHPMD.LongVariable)
+ * @SuppressWarnings(PHPMD.ShortVariable)
  * @SuppressWarnings(PHPMD.TooManyFields)
  */
 class ListPaymentOptionsResult extends ResultEntity
