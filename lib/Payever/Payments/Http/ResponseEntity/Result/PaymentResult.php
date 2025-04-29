@@ -17,56 +17,56 @@ use Payever\Sdk\Core\Helper\StringHelper;
 use Payever\Sdk\Core\Http\MessageEntity\ResultEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\PaymentDetailsEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\AddressEntity;
-use Payever\Sdk\Payments\Http\MessageEntity\Payment\CartItemEntity;
+use Payever\Sdk\Payments\Http\MessageEntity\Payment\CartItemRetrieveEntity;
 use Payever\Sdk\Payments\Http\MessageEntity\Payment\ShippingOptionEntity;
 
 /**
  * This class represents Payment Result Entity
  *
- * @method string               getId()
- * @method string               getStatus()
- * @method string               getSpecificStatus()
- * @method string               getMerchantName()
- * @method string               getCustomerName()
- * @method string               getCustomerEmail()
- * @method string               getPaymentType()
- * @method \DateTime|false      getCreatedAt()
- * @method \DateTime|false      getUpdatedAt()
- * @method string               getChannel()
- * @method string               getChannelType()
- * @method string               getChannelSource()
- * @method string               getReference()
- * @method float                getAmount()
- * @method float                getTotal()
- * @method string               getCurrency()
- * @method float                getDeliveryFee()
- * @method float                getPaymentFee()
- * @method float                getDownPayment()
- * @method AddressEntity        getAddress()
- * @method AddressEntity        getShippingAddress()
- * @method PaymentDetailsEntity getPaymentDetails()
- * @method array                getPaymentDetailsArray()
- * @method ShippingOptionEntity getShippingOption()
- * @method CartItemEntity[]     getItems()
- * @method \stdClass[]          getHistory()
- * @method $this                setId(string $id)
- * @method $this                setStatus(string $status)
- * @method $this                setSpecificStatus(string $specificStatus)
- * @method $this                setMerchantName(string $merchantName)
- * @method $this                setCustomerName(string $customerName)
- * @method $this                setCustomerEmail(string $customerEmail)
- * @method $this                setPaymentType(string $paymentType)
- * @method $this                setChannel(string $channel)
- * @method $this                setChannelType(string $channelType)
- * @method $this                setChannelSource(string $channelSource)
- * @method $this                setReference(string $reference)
- * @method $this                setAmount(float $amount)
- * @method $this                setTotal(float $total)
- * @method $this                setCurrency(string $currency)
- * @method $this                setDeliveryFee(float $deliveryFee)
- * @method $this                setPaymentFee(float $paymentFee)
- * @method $this                setDownPayment(float $downPayment)
- * @method $this                setHistory(array $history)
+ * @method string                    getId()
+ * @method string                    getStatus()
+ * @method string                    getSpecificStatus()
+ * @method string                    getMerchantName()
+ * @method string                    getCustomerName()
+ * @method string                    getCustomerEmail()
+ * @method string                    getPaymentType()
+ * @method \DateTime|false           getCreatedAt()
+ * @method \DateTime|false           getUpdatedAt()
+ * @method string                    getChannel()
+ * @method string                    getChannelType()
+ * @method string                    getChannelSource()
+ * @method string                    getReference()
+ * @method float                     getAmount()
+ * @method float                     getTotal()
+ * @method string                    getCurrency()
+ * @method float                     getDeliveryFee()
+ * @method float                     getPaymentFee()
+ * @method float                     getDownPayment()
+ * @method AddressEntity             getAddress()
+ * @method AddressEntity             getShippingAddress()
+ * @method PaymentDetailsEntity      getPaymentDetails()
+ * @method array                     getPaymentDetailsArray()
+ * @method ShippingOptionEntity      getShippingOption()
+ * @method CartItemRetrieveEntity[]  getItems()
+ * @method \stdClass[]               getHistory()
+ * @method $this                     setId(string $id)
+ * @method $this                     setStatus(string $status)
+ * @method $this                     setSpecificStatus(string $specificStatus)
+ * @method $this                     setMerchantName(string $merchantName)
+ * @method $this                     setCustomerName(string $customerName)
+ * @method $this                     setCustomerEmail(string $customerEmail)
+ * @method $this                     setPaymentType(string $paymentType)
+ * @method $this                     setChannel(string $channel)
+ * @method $this                     setChannelType(string $channelType)
+ * @method $this                     setChannelSource(string $channelSource)
+ * @method $this                     setReference(string $reference)
+ * @method $this                     setAmount(float $amount)
+ * @method $this                     setTotal(float $total)
+ * @method $this                     setCurrency(string $currency)
+ * @method $this                     setDeliveryFee(float $deliveryFee)
+ * @method $this                     setPaymentFee(float $paymentFee)
+ * @method $this                     setDownPayment(float $downPayment)
+ * @method $this                     setHistory(array $history)
  *
  * @SuppressWarnings(PHPMD.ShortVariable)
  * @SuppressWarnings(PHPMD.StaticAccess)
@@ -155,7 +155,7 @@ class PaymentResult extends ResultEntity
     /** @var ShippingOptionEntity $shippingOption */
     protected $shippingOption;
 
-    /** @var CartItemEntity[] */
+    /** @var CartItemRetrieveEntity[] */
     protected $items;
 
     /** @var \stdClass[]|array $history */
@@ -304,7 +304,7 @@ class PaymentResult extends ResultEntity
 
         if ($items && is_array($items)) {
             foreach ($items as $item) {
-                $this->items[] = new CartItemEntity($item);
+                $this->items[] = new CartItemRetrieveEntity($item);
             }
         }
 

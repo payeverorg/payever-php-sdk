@@ -242,6 +242,20 @@ class PaymentMethod extends EnumerableConstants
     }
 
     /**
+     * Returns payment methods that have a unique payment reference check
+     *
+     * @return array
+     */
+    public static function getUniqueReferenceMethods()
+    {
+        return [
+            static::METHOD_PAYPAL,
+            static::METHOD_HSBC,
+            static::METHOD_VERIFONE_BNPL,
+        ];
+    }
+
+    /**
      * Returns payment methods which should be checked whether it is necessary to hide them for current device
      *
      * @return array
